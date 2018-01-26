@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
@@ -25,13 +26,16 @@ namespace Assets.Scripts
 		{
 			Vector2 mousePosition = Input.mousePosition;
 			Vector2 lookingDirection = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane)) - transform.position;
+			lookingDirection.Normalize();
 			
 			body.velocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * speed * Time.deltaTime;
 
 			if (Input.GetButtonUp("Jump"))
 			{
 				ProjectileController projectile = (Instantiate(projectilePrefab, transform.position, transform.rotation) as GameObject).GetComponent<ProjectileController>();
-				projectile.Velocity = lookingDirection.normalized; //body.velocity.normalized;
+				projectile.Velocity = lookingDirection;
+				projectile.Owner = gameObject;
+				Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), GetComponent<Collider2D>());
 			}
 			
 			lifetime -= Time.deltaTime;
