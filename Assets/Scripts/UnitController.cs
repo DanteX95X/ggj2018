@@ -23,14 +23,15 @@ namespace Assets.Scripts
 
 		void Update()
 		{
-			
+			Vector2 mousePosition = Input.mousePosition;
+			Vector2 lookingDirection = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane));
 			
 			body.velocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * speed * Time.deltaTime;
 
 			if (Input.GetButtonUp("Jump"))
 			{
 				ProjectileController projectile = (Instantiate(projectilePrefab, transform.position, transform.rotation) as GameObject).GetComponent<ProjectileController>();
-				projectile.Velocity = body.velocity.normalized;
+				projectile.Velocity = lookingDirection.normalized; //body.velocity.normalized;
 			}
 			
 			lifetime -= Time.deltaTime;
