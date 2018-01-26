@@ -49,7 +49,7 @@ namespace Assets.Scripts
 		private void OnCollisionEnter2D(Collision2D other)
 		{
 			UnitController unit = other.collider.gameObject.GetComponent<UnitController>();
-			if (unit != null && unit != owner)
+			if (unit != null)
 			{
 				Destroy(other.collider.gameObject);
 				Destroy(gameObject);
