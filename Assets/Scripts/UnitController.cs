@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,12 +15,12 @@ namespace Assets.Scripts
 
 		[SerializeField] private GameObject projectilePrefab = null;
 
-		[SerializeField] private int owner;
-
 		[SerializeField] private bool isIll;
 		
 		private float lifetime;
 		private Rigidbody2D body;
+		private int owner;
+		private bool isActive = false;
 		
 		private TextMesh text = null;
 
@@ -28,29 +29,49 @@ namespace Assets.Scripts
 			get { return isIll; }
 			set { isIll = value; }
 		}
+
+		public int Owner
+		{
+			set { owner = value; }
+		}
 		
+		public bool IsActive
+		{
+			set { isActive = value; }
+		}
+
 		void Start()
 		{
 			lifetime = initialLifetime;
 			body = GetComponent<Rigidbody2D>();
 			text = GetComponentInChildren<TextMesh>();
+			GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
 		}
 
 		void Update()
 		{
-			Vector2 mousePosition = Input.mousePosition;
-			Vector2 lookingDirection = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane)) - transform.position;
-			lookingDirection.Normalize();
-			
-			body.velocity = new Vector2(Input.GetAxis("Horizontal" + owner), Input.GetAxis("Vertical" + owner)) * speed * Time.deltaTime;
-
-			if (Input.GetButtonUp("Fire" + owner))
+			if (isActive)
 			{
-				ProjectileController projectile = (Instantiate(projectilePrefab, transform.position, transform.rotation) as GameObject).GetComponent<ProjectileController>();
-				projectile.Velocity = lookingDirection;
-				projectile.Owner = gameObject;
-				Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+				Vector2 mousePosition = Input.mousePosition;
+				Vector2 lookingDirection =
+					Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane)) -
+					transform.position;
+				lookingDirection.Normalize();
+
+				if (Input.GetButtonUp("Fire" + owner) && isIll)
+				{
+					Debug.Log("Fired");
+					ProjectileController projectile = (Instantiate(projectilePrefab, transform.position, transform.rotation) as GameObject).GetComponent<ProjectileController>();
+					projectile.Velocity = lookingDirection;
+					projectile.Owner = gameObject;
+					Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+					isIll = false;
+				}
+				
+				body.velocity = new Vector2(Input.GetAxis("Horizontal" + owner), Input.GetAxis("Vertical" + owner)) * speed * Time.deltaTime;
+				
 			}
+
 
 			if (isIll)
 			{

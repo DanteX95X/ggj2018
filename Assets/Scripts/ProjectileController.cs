@@ -41,7 +41,7 @@ namespace Assets.Scripts
 			invincibilityTime -= Time.deltaTime;
 			if (invincibilityTime < 0 && !collisionEnabled)
 			{
-				Physics2D.IgnoreCollision(GetComponent<Collider2D>(), owner.GetComponent<Collider2D>());
+				Physics2D.IgnoreCollision(GetComponent<Collider2D>(), owner.GetComponent<Collider2D>(), false);
 				collisionEnabled = true;
 			}
 		}
@@ -51,9 +51,10 @@ namespace Assets.Scripts
 			UnitController unit = other.collider.gameObject.GetComponent<UnitController>();
 			if (unit != null)
 			{
+				Debug.Log("Destroyed");
 				if(!unit.IsIll)
 					unit.IsIll = true;
-				owner.GetComponent<UnitController>().IsIll = false;
+				//owner.GetComponent<UnitController>().IsIll = false;
 				Destroy(gameObject);
 			}
 		}
