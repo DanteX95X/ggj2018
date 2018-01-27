@@ -15,8 +15,13 @@ namespace Assets.Scripts
 		private List<Player> players = new List<Player>();
 
 		private List<bool> isPlayerDead = new List<bool>();
-		
-		void Start()
+
+        public AudioClip gameMusic;
+        public AudioClip gameOverMusic;
+
+        private AudioSource audioSource;
+
+        void Start()
 		{
 			players = FindObjectsOfType<Player>().OfType<Player>().ToList();
 			for (int i = 0; i < players.Count; ++i)
@@ -24,8 +29,11 @@ namespace Assets.Scripts
 				isPlayerDead.Add(false);
 			}
 
-			GetComponent<AudioSource>().playOnAwake = false;
-		}
+            audioSource = GetComponent<AudioSource>();
+            //audioSource.playOnAwake = true;
+            audioSource.clip = gameMusic;
+            audioSource.Play();
+        }
 
 		void Update()
 		{
@@ -35,11 +43,16 @@ namespace Assets.Scripts
 			if (isGameOver() != -2)
 			{
 				Debug.Log("GameOver");
-				if(!GetComponent<AudioSource>().isPlaying)
-					GetComponent<AudioSource>().Play();
-			}
+                
+                audioSource.clip = gameOverMusic;
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.Play();
+                }
 
-		}
+            }
+
+        }
 
 		public void RegisterPlayerDeath(int playerIndex)
 		{

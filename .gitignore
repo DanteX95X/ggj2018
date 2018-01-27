@@ -320,3 +320,7 @@ Temp
 *.userprefs
 /_docs_
 /UnityPackageManager/manifest.json
+# /Assets/Game Jam Template
+# /Assets/Game Jam Template.meta
+/Assets/PostProcessing
+/Assets/PostProcessing.meta
