@@ -60,7 +60,14 @@ namespace Assets.Scripts
 					owner.GetComponent<UnitController>().IsIll = false;
 				//if(!unit.IsIll)
 				unit.HasBall = true;
+
+				ParticleSystem particles = GetComponentInChildren<ParticleSystem>();
+				particles.transform.position = unit.transform.position + new Vector3(0, 0, 0.2f);
+				particles.transform.parent = unit.transform;
+				particles.transform.localScale = new Vector3(1, 1, 1);
+				
 				Destroy(gameObject);
+				return;
 			}
 			else if(!collisionEnabled && owner != null)
 			{
