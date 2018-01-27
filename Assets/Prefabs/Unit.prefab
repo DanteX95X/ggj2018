@@ -159,7 +159,7 @@ MonoBehaviour:
   speed: 200
   projectilePrefab: {fileID: 1032659925920542, guid: 58f99b32ba0e247eb943e0ee846da276,
     type: 2}
-  isIll: 1
+  hasBall: 0
   minScaleFraction: 0.4
 --- !u!135 &135170158624248480
 SphereCollider:

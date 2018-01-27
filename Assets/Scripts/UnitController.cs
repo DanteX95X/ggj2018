@@ -143,6 +143,11 @@ namespace Assets.Scripts
 			projectile.Owner = gameObject;
 			Physics.IgnoreCollision(projectile.GetComponent<Collider>(), GetComponent<Collider>());
 			hasBall = false;
+			ParticleSystem particles = GetComponentInChildren<ParticleSystem>();
+			particles.transform.position = projectile.transform.position + new Vector3(0, 0, 0.2f);
+			particles.transform.parent = projectile.transform;
+			particles.transform.localScale = new Vector3(1, 1, 1);
+
 		}
 	}
 }
