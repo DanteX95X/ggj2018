@@ -27,12 +27,35 @@ namespace Assets.Scripts
 
 		void SwitchUnit()
 		{
+			if (units.Count == 0)
+				return;
+			
 			units[currentUnitIndex].IsActive = false;
 			units[currentUnitIndex].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 			++currentUnitIndex;
 			currentUnitIndex %= units.Count;
 			units[currentUnitIndex].IsActive = true;
 			units[currentUnitIndex].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+		}
+
+		public void DestroyUnit(UnitController unit)
+		{	
+			if (unit == units[currentUnitIndex])
+			{
+				SwitchUnit();
+			}
+
+
+			for (int i = 0; i < units.Count; ++i)
+			{
+				if (units[i] == unit)
+				{
+					units.RemoveAt(i);
+					if (i < currentUnitIndex)
+						--currentUnitIndex;
+				}
+			}
+			Destroy(unit.gameObject);
 		}
 		
 		void Update()

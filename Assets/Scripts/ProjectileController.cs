@@ -8,6 +8,10 @@ namespace Assets.Scripts
 	{
 		[SerializeField] private float speed = 10.0f;
 
+		[SerializeField] private float maxScaleFraction = 5;
+
+		[SerializeField] private float growthTime = 10;
+
 		private Rigidbody body;
 
 		private Vector2 velocity;
@@ -15,6 +19,10 @@ namespace Assets.Scripts
 		private GameObject owner;
 
 		private bool collisionEnabled = false;
+
+		private Vector3 scale;
+
+		private float lifetime;
 		
 		public Vector2 Velocity
 		{
@@ -30,10 +38,14 @@ namespace Assets.Scripts
 		{
 			body = GetComponent<Rigidbody>();
 			collisionEnabled = false;
+			scale = transform.localScale;
+			lifetime = 0;
 		}
 
 		private void Update()
 		{
+			lifetime += Time.deltaTime;
+			transform.localScale = scale *(1 + (maxScaleFraction-1) * Mathf.Clamp(lifetime/growthTime, 0, 1));
 		}
 
 		private void OnCollisionEnter(Collision other)
@@ -46,7 +58,7 @@ namespace Assets.Scripts
 					unit.IsIll = true;
 				Destroy(gameObject);
 			}
-			else if(!collisionEnabled)
+			else if(!collisionEnabled && owner != null)
 			{
 				Physics.IgnoreCollision(GetComponent<Collider>(), owner.GetComponent<Collider>(), false);
 				collisionEnabled = true;

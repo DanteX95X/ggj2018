@@ -65,12 +65,7 @@ namespace Assets.Scripts
 
 				if (Input.GetButtonUp("Fire" + owner) && isIll)
 				{
-					Debug.Log("Fired");
-					ProjectileController projectile = (Instantiate(projectilePrefab, transform.position, transform.rotation) as GameObject).GetComponent<ProjectileController>();
-					projectile.Velocity = lookingDirection;
-					projectile.Owner = gameObject;
-					Physics.IgnoreCollision(projectile.GetComponent<Collider>(), GetComponent<Collider>());
-					isIll = false;
+					SpawnProjectile(lookingDirection);
 				}
 				
 				body.velocity = new Vector2(Input.GetAxis("Horizontal" + owner), Input.GetAxis("Vertical" + owner)) * speed * Time.deltaTime;
@@ -84,7 +79,9 @@ namespace Assets.Scripts
 				if (lifetime <= 0)
 				{
 					Debug.Log("Bang");
-					Destroy(gameObject);
+					Vector2 randomDirection = new Vector2(Random.Range(-100, 100), Random.Range(-100, 100)).normalized;
+					SpawnProjectile(randomDirection);
+					transform.parent.GetComponent<Player>().DestroyUnit(this);
 				}
 			}
 
@@ -92,6 +89,16 @@ namespace Assets.Scripts
 			Vector3 minScale = minScaleFraction * scale;
 			float degenerationRatio = lifetime / initialLifetime;
 			transform.localScale = minScale + (scale-minScale)*degenerationRatio;
+		}
+
+		void SpawnProjectile(Vector2 direction)
+		{
+			Debug.Log("Fired");
+			ProjectileController projectile = (Instantiate(projectilePrefab, transform.position, transform.rotation) as GameObject).GetComponent<ProjectileController>();
+			projectile.Velocity = direction;
+			projectile.Owner = gameObject;
+			Physics.IgnoreCollision(projectile.GetComponent<Collider>(), GetComponent<Collider>());
+			isIll = false;
 		}
 	}
 }
