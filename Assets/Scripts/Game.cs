@@ -23,6 +23,8 @@ namespace Assets.Scripts
 			{
 				isPlayerDead.Add(false);
 			}
+
+			GetComponent<AudioSource>().playOnAwake = false;
 		}
 
 		void Update()
@@ -33,6 +35,8 @@ namespace Assets.Scripts
 			if (isGameOver() != -2)
 			{
 				Debug.Log("GameOver");
+				if(!GetComponent<AudioSource>().isPlaying)
+					GetComponent<AudioSource>().Play();
 			}
 
 		}

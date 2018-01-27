@@ -40,6 +40,8 @@ namespace Assets.Scripts
 			collisionEnabled = false;
 			scale = transform.localScale;
 			lifetime = 0;
+
+			GetComponent<AudioSource>().playOnAwake = false;
 		}
 
 		private void Update()
@@ -65,6 +67,8 @@ namespace Assets.Scripts
 				Physics.IgnoreCollision(GetComponent<Collider>(), owner.GetComponent<Collider>(), false);
 				collisionEnabled = true;
 			}
+			
+			GetComponent<AudioSource>().Play();
 		}
 	}
 }

@@ -33,6 +33,8 @@ namespace Assets.Scripts
 			currentUnitIndex = 0;
 			units[0].IsActive = true;
 			units[0].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+
+			GetComponent<AudioSource>().playOnAwake = false;
 		}
 
 		void SwitchUnit()
@@ -71,6 +73,8 @@ namespace Assets.Scripts
 			{
 				FindObjectOfType<Game>().RegisterPlayerDeath(index);
 			}
+
+			GetComponent<AudioSource>().Play();
 		}
 		
 		void Update()
