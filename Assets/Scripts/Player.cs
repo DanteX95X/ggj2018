@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
@@ -11,6 +12,8 @@ namespace Assets.Scripts
 		[SerializeField]  List<UnitController> units = new List<UnitController>();
 
 		[SerializeField] private GameObject tombstone = null;
+
+		[SerializeField] private MessageBox messageBox = null;
 		
 		private int currentUnitIndex = -1;
 
@@ -38,6 +41,8 @@ namespace Assets.Scripts
 			units[0].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
 
 			GetComponent<AudioSource>().playOnAwake = false;
+
+			messageBox = FindObjectOfType<MessageBox>();
 		}
 
 		void SwitchUnit()
@@ -53,6 +58,7 @@ namespace Assets.Scripts
 			units[currentUnitIndex].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
 		}
 
+		private static int ufo = 0;
 		public void DestroyUnit(UnitController unit)
 		{	
 			if (unit == units[currentUnitIndex])
@@ -71,6 +77,7 @@ namespace Assets.Scripts
 				}
 			}
 
+			messageBox.Message = "Unitname has died!" + ufo++;
 			Instantiate(tombstone, unit.transform.position, unit.transform.rotation);
 			Destroy(unit.gameObject);
 
