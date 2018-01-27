@@ -23,7 +23,7 @@ namespace Assets.Scripts
 		private float lifetime;
 		private Rigidbody body;
 		private int owner;
-		private bool isActive = false;
+		[SerializeField] bool isActive = false;
 		
 		private TextMesh text = null;
 		private Vector3 scale;
@@ -141,6 +141,7 @@ namespace Assets.Scripts
 			particles.transform.position = projectile.transform.position + new Vector3(0, 0, 0.2f);
 			particles.transform.parent = projectile.transform;
 			particles.transform.localScale = new Vector3(1, 1, 1);
+			GetComponent<Animator>().SetTrigger("Shoot");
 
 		}
 	}
