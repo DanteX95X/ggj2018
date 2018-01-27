@@ -70,18 +70,39 @@ namespace Assets.Scripts
 
 		void Update()
 		{
-			if (isActive)
-			{
-				Vector2 mousePosition = Input.mousePosition;
-				Vector2 lookingDirection = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane)) - transform.position;
-				lookingDirection.Normalize();
 
+            //Debug.Log("Horizontal1:"+Input.GetAxis("Horizontal1"));
+            //Debug.Log("Vertical1:"+Input.GetAxis("Vertical1"));
+            //Debug.Log("Horizontal1R:" + Input.GetAxis("Horizontal1R"));
+            //Debug.Log("Vertical1R:" + Input.GetAxis("Vertical1R"));
+
+
+            if (isActive)
+			{
+                // aim and shoot
 				if (Input.GetButtonUp("Fire" + owner) && hasBall)
 				{
-					SpawnProjectile(lookingDirection);
+
+                    Vector2 mousePosition = Input.mousePosition;
+
+                    Vector2 lookingDirection;
+
+                    if (owner == 0)
+                    {
+                        lookingDirection = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane)) - transform.position;
+                    }
+                    else //(owner == 1)
+                    {
+                        lookingDirection = new Vector3(Input.GetAxis("Horizontal" + owner + "R"), Input.GetAxis("Vertical" + owner + "R"));
+                    }
+
+                    lookingDirection.Normalize();
+
+                    SpawnProjectile(lookingDirection);
 				}
-				
-				body.velocity = new Vector2(Input.GetAxis("Horizontal" + owner), Input.GetAxis("Vertical" + owner)) * speed * Time.deltaTime;
+
+                // player movement
+                body.velocity = new Vector2(Input.GetAxis("Horizontal" + owner), Input.GetAxis("Vertical" + owner)) * speed * Time.deltaTime;
 				
 			}
 
