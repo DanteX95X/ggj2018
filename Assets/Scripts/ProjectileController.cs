@@ -51,11 +51,13 @@ namespace Assets.Scripts
 		private void OnCollisionEnter(Collision other)
 		{
 			UnitController unit = other.collider.gameObject.GetComponent<UnitController>();
-			if (unit != null)
+			if (unit != null && !unit.HasBall)
 			{
 				Debug.Log("Destroyed");
-				if(!unit.IsIll)
-					unit.IsIll = true;
+				if(owner != null)
+					owner.GetComponent<UnitController>().IsIll = false;
+				//if(!unit.IsIll)
+				unit.HasBall = true;
 				Destroy(gameObject);
 			}
 			else if(!collisionEnabled && owner != null)

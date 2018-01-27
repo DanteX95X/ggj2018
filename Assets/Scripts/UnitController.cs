@@ -16,7 +16,7 @@ namespace Assets.Scripts
 
 		[SerializeField] private GameObject projectilePrefab = null;
 
-		[SerializeField] private bool isIll;
+		[SerializeField] private bool hasBall;
 
 		[SerializeField] private float minScaleFraction = 0.3f;
 		
@@ -27,11 +27,23 @@ namespace Assets.Scripts
 		
 		private TextMesh text = null;
 		private Vector3 scale;
+		private bool isIll;
 
 		public bool IsIll
 		{
 			get { return isIll; }
 			set { isIll = value; }
+		}
+
+		public bool HasBall
+		{
+			get { return hasBall; }
+			set 
+			{ 
+				hasBall = value;
+				if (hasBall) 
+					isIll = true;
+			}
 		}
 
 		public int Owner
@@ -51,6 +63,9 @@ namespace Assets.Scripts
 			text = GetComponentInChildren<TextMesh>();
 			GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 			scale = transform.localScale;
+			isIll = false;
+			if (hasBall)
+				isIll = true;
 		}
 
 		void Update()
@@ -58,12 +73,10 @@ namespace Assets.Scripts
 			if (isActive)
 			{
 				Vector2 mousePosition = Input.mousePosition;
-				Vector2 lookingDirection =
-					Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane)) -
-					transform.position;
+				Vector2 lookingDirection = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane)) - transform.position;
 				lookingDirection.Normalize();
 
-				if (Input.GetButtonUp("Fire" + owner) && isIll)
+				if (Input.GetButtonUp("Fire" + owner) && hasBall)
 				{
 					SpawnProjectile(lookingDirection);
 				}
@@ -79,8 +92,13 @@ namespace Assets.Scripts
 				if (lifetime <= 0)
 				{
 					Debug.Log("Bang");
-					Vector2 randomDirection = new Vector2(Random.Range(-100, 100), Random.Range(-100, 100)).normalized;
-					SpawnProjectile(randomDirection);
+					
+					if (hasBall)
+					{
+						Vector2 randomDirection = new Vector2(Random.Range(-100, 100), Random.Range(-100, 100)).normalized;
+						SpawnProjectile(randomDirection);
+					}
+
 					transform.parent.GetComponent<Player>().DestroyUnit(this);
 				}
 			}
@@ -98,7 +116,7 @@ namespace Assets.Scripts
 			projectile.Velocity = direction;
 			projectile.Owner = gameObject;
 			Physics.IgnoreCollision(projectile.GetComponent<Collider>(), GetComponent<Collider>());
-			isIll = false;
+			hasBall = false;
 		}
 	}
 }

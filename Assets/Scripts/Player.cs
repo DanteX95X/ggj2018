@@ -60,6 +60,10 @@ namespace Assets.Scripts
 		
 		void Update()
 		{
+			if (Input.GetButtonUp("Fire1"))
+			{
+				Debug.Log("git");
+			}
 			if (Input.GetButtonUp("Switch" + index))
 			{
 				SwitchUnit();

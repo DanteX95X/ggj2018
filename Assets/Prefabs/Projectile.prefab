@@ -70,7 +70,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 200
-  invincibilityTime: 0.1
+  maxScaleFraction: 1
+  growthTime: 10
 --- !u!135 &135297929572752916
 SphereCollider:
   m_ObjectHideFlags: 1
