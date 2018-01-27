@@ -20,11 +20,13 @@ namespace Assets.Scripts
 		void Start()
 		{
 			body = GetComponent<Rigidbody2D>();
-		}
+            //body.velocity = transform.forward * velocity;
+            body.velocity = velocity;
+        }
 
-		void Update()
+        void Update()
 		{
-			body.velocity = velocity * Time.deltaTime;
+			//body.velocity = velocity * Time.deltaTime;
 		}
 	}
 }
