@@ -76,12 +76,6 @@ namespace Assets.Scripts
 		void Update()
 		{
 
-            //Debug.Log("Horizontal1:"+Input.GetAxis("Horizontal1"));
-            //Debug.Log("Vertical1:"+Input.GetAxis("Vertical1"));
-            //Debug.Log("Horizontal1R:" + Input.GetAxis("Horizontal1R"));
-            //Debug.Log("Vertical1R:" + Input.GetAxis("Vertical1R"));
-
-
             if (isActive)
 			{
                 // aim and shoot
@@ -129,7 +123,7 @@ namespace Assets.Scripts
 				}
 			}
 
-			text.text = "" + (int)Mathf.Ceil(lifetime);
+			text.text = "Unitname " + (int)Mathf.Ceil(lifetime);
 			Vector3 minScale = minScaleFraction * scale;
 			float degenerationRatio = lifetime / initialLifetime;
 			transform.localScale = minScale + (scale-minScale)*degenerationRatio;
