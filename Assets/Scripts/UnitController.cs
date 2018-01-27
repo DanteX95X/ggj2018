@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Assets.Scripts
 {
@@ -19,15 +21,19 @@ namespace Assets.Scripts
 		[SerializeField] private bool hasBall;
 
 		[SerializeField] private float minScaleFraction = 0.3f;
+
+		[SerializeField] private String unitName = "";
 		
 		private float lifetime;
 		private Rigidbody body;
 		private int owner;
-		private bool isActive = false;
+		[SerializeField] bool isActive = false;
 		
 		private TextMesh text = null;
 		private Vector3 scale;
 		private bool isIll;
+
+		private Animator animator;
 
 		public bool IsIll
 		{
@@ -60,6 +66,11 @@ namespace Assets.Scripts
 		{
 			get { return lifetime; }
 		}
+
+		public String UnitName
+		{
+			get { return unitName; }
+		}
 		
 		void Start()
 		{
@@ -71,16 +82,12 @@ namespace Assets.Scripts
 			isIll = false;
 			if (hasBall)
 				isIll = true;
+
+			animator = GetComponent<Animator>();
 		}
 
 		void Update()
 		{
-
-            //Debug.Log("Horizontal1:"+Input.GetAxis("Horizontal1"));
-            //Debug.Log("Vertical1:"+Input.GetAxis("Vertical1"));
-            //Debug.Log("Horizontal1R:" + Input.GetAxis("Horizontal1R"));
-            //Debug.Log("Vertical1R:" + Input.GetAxis("Vertical1R"));
-
 
             if (isActive)
 			{
@@ -107,7 +114,9 @@ namespace Assets.Scripts
 				}
 
                 // player movement
-                body.velocity = new Vector2(Input.GetAxis("Horizontal" + owner), Input.GetAxis("Vertical" + owner)) * speed * Time.deltaTime;
+				Vector2 direction = new Vector2(Input.GetAxis("Horizontal" + owner), Input.GetAxis("Vertical" + owner)).normalized;
+				animator.SetFloat("Speed", direction.magnitude);
+                body.velocity =  direction * speed * Time.deltaTime;
 				
 			}
 
@@ -129,7 +138,7 @@ namespace Assets.Scripts
 				}
 			}
 
-			text.text = "" + (int)Mathf.Ceil(lifetime);
+			text.text = "" + unitName + " " + (int)Mathf.Ceil(lifetime);
 			Vector3 minScale = minScaleFraction * scale;
 			float degenerationRatio = lifetime / initialLifetime;
 			transform.localScale = minScale + (scale-minScale)*degenerationRatio;
@@ -147,6 +156,7 @@ namespace Assets.Scripts
 			particles.transform.position = projectile.transform.position + new Vector3(0, 0, 0.2f);
 			particles.transform.parent = projectile.transform;
 			particles.transform.localScale = new Vector3(1, 1, 1);
+			animator.SetTrigger("Shoot");
 
 		}
 	}
