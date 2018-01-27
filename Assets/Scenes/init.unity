@@ -335,6 +335,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deadline: 30
   timer: {fileID: 826839540}
+  gameMusic: {fileID: 8300000, guid: e15cb7aafc099f946b22272aa88d31f3, type: 3}
+  gameOverMusic: {fileID: 8300000, guid: ec90eb1fabd40c64e8d11c67646bc963, type: 3}
 --- !u!82 &128484444
 AudioSource:
   m_ObjectHideFlags: 0
