@@ -318,3 +318,5 @@ Temp
 *.unityproj
 *.sln
 *.userprefs
+/_docs_
+/UnityPackageManager/manifest.json
