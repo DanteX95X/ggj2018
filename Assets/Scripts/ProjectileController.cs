@@ -38,12 +38,11 @@ namespace Assets.Scripts
 		{
 			//body.velocity = velocity * Time.deltaTime;
 
-			invincibilityTime -= Time.deltaTime;
-			if (invincibilityTime < 0 && !collisionEnabled)
-			{
-				Physics.IgnoreCollision(GetComponent<Collider>(), owner.GetComponent<Collider>(), false);
-				collisionEnabled = true;
-			}
+//			invincibilityTime -= Time.deltaTime;
+//			if (invincibilityTime < 0 && !collisionEnabled)
+//			{
+//				
+//			}
 		}
 
 		private void OnCollisionEnter(Collision other)
@@ -55,6 +54,11 @@ namespace Assets.Scripts
 				if(!unit.IsIll)
 					unit.IsIll = true;
 				Destroy(gameObject);
+			}
+			else if(!collisionEnabled)
+			{
+				Physics.IgnoreCollision(GetComponent<Collider>(), owner.GetComponent<Collider>(), false);
+				collisionEnabled = true;
 			}
 		}
 	}
