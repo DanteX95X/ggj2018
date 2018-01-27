@@ -66,6 +66,11 @@ namespace Assets.Scripts
 				}
 			}
 			Destroy(unit.gameObject);
+
+			if (units.Count == 0)
+			{
+				FindObjectOfType<Game>().RegisterPlayerDeath(index);
+			}
 		}
 		
 		void Update()
