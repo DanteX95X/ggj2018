@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,8 @@ namespace Assets.Scripts
 		[SerializeField] private float speed = 10.0f;
 
 		[SerializeField] private GameObject projectilePrefab = null;
+
+		[SerializeField] private int owner;
 		
 		private float lifetime;
 		private Rigidbody2D body;
@@ -28,9 +31,9 @@ namespace Assets.Scripts
 			Vector2 lookingDirection = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane)) - transform.position;
 			lookingDirection.Normalize();
 			
-			body.velocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * speed * Time.deltaTime;
+			body.velocity = new Vector2(Input.GetAxis("Horizontal" + owner), Input.GetAxis("Vertical" + owner)) * speed * Time.deltaTime;
 
-			if (Input.GetButtonUp("Jump"))
+			if (Input.GetButtonUp("Fire" + owner))
 			{
 				ProjectileController projectile = (Instantiate(projectilePrefab, transform.position, transform.rotation) as GameObject).GetComponent<ProjectileController>();
 				projectile.Velocity = lookingDirection;
