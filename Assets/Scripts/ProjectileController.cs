@@ -15,8 +15,6 @@ namespace Assets.Scripts
 		private GameObject owner;
 
 		private bool collisionEnabled = false;
-
-		[SerializeField] private float invincibilityTime = 0.1f;
 		
 		public Vector2 Velocity
 		{
@@ -36,13 +34,6 @@ namespace Assets.Scripts
 
 		private void Update()
 		{
-			//body.velocity = velocity * Time.deltaTime;
-
-//			invincibilityTime -= Time.deltaTime;
-//			if (invincibilityTime < 0 && !collisionEnabled)
-//			{
-//				
-//			}
 		}
 
 		private void OnCollisionEnter(Collision other)
