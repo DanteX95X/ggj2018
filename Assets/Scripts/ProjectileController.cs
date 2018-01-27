@@ -20,7 +20,7 @@ namespace Assets.Scripts
 		
 		public Vector2 Velocity
 		{
-			set { velocity = value * speed; }
+			set { velocity = value * speed; GetComponent<Rigidbody2D>().AddForce(velocity); }
 		}
 
 		public GameObject Owner
@@ -36,7 +36,7 @@ namespace Assets.Scripts
 
 		private void Update()
 		{
-			body.velocity = velocity * Time.deltaTime;
+			//body.velocity = velocity * Time.deltaTime;
 
 			invincibilityTime -= Time.deltaTime;
 			if (invincibilityTime < 0 && !collisionEnabled)
@@ -54,7 +54,6 @@ namespace Assets.Scripts
 				Debug.Log("Destroyed");
 				if(!unit.IsIll)
 					unit.IsIll = true;
-				//owner.GetComponent<UnitController>().IsIll = false;
 				Destroy(gameObject);
 			}
 		}
