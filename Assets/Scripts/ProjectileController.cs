@@ -8,7 +8,7 @@ namespace Assets.Scripts
 	{
 		[SerializeField] private float speed = 10.0f;
 
-		private Rigidbody2D body;
+		private Rigidbody body;
 
 		private Vector2 velocity;
 
@@ -20,7 +20,7 @@ namespace Assets.Scripts
 		
 		public Vector2 Velocity
 		{
-			set { velocity = value * speed; GetComponent<Rigidbody2D>().AddForce(velocity); }
+			set { velocity = value * speed; GetComponent<Rigidbody>().AddForce(velocity); }
 		}
 
 		public GameObject Owner
@@ -30,7 +30,7 @@ namespace Assets.Scripts
 
 		private void Start()
 		{
-			body = GetComponent<Rigidbody2D>();
+			body = GetComponent<Rigidbody>();
 			collisionEnabled = false;
 		}
 
@@ -41,12 +41,12 @@ namespace Assets.Scripts
 			invincibilityTime -= Time.deltaTime;
 			if (invincibilityTime < 0 && !collisionEnabled)
 			{
-				Physics2D.IgnoreCollision(GetComponent<Collider2D>(), owner.GetComponent<Collider2D>(), false);
+				Physics.IgnoreCollision(GetComponent<Collider>(), owner.GetComponent<Collider>(), false);
 				collisionEnabled = true;
 			}
 		}
 
-		private void OnCollisionEnter2D(Collision2D other)
+		private void OnCollisionEnter(Collision other)
 		{
 			UnitController unit = other.collider.gameObject.GetComponent<UnitController>();
 			if (unit != null)

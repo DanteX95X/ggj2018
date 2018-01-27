@@ -22,17 +22,17 @@ namespace Assets.Scripts
 
 			currentUnitIndex = 0;
 			units[0].IsActive = true;
-			units[0].GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+			units[0].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
 		}
 
 		void SwitchUnit()
 		{
 			units[currentUnitIndex].IsActive = false;
-			units[currentUnitIndex].GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+			units[currentUnitIndex].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 			++currentUnitIndex;
 			currentUnitIndex %= units.Count;
 			units[currentUnitIndex].IsActive = true;
-			units[currentUnitIndex].GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+			units[currentUnitIndex].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
 		}
 		
 		void Update()

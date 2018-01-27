@@ -18,7 +18,7 @@ namespace Assets.Scripts
 		[SerializeField] private bool isIll;
 		
 		private float lifetime;
-		private Rigidbody2D body;
+		private Rigidbody body;
 		private int owner;
 		private bool isActive = false;
 		
@@ -43,9 +43,9 @@ namespace Assets.Scripts
 		void Start()
 		{
 			lifetime = initialLifetime;
-			body = GetComponent<Rigidbody2D>();
+			body = GetComponent<Rigidbody>();
 			text = GetComponentInChildren<TextMesh>();
-			GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+			GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 		}
 
 		void Update()
@@ -64,7 +64,7 @@ namespace Assets.Scripts
 					ProjectileController projectile = (Instantiate(projectilePrefab, transform.position, transform.rotation) as GameObject).GetComponent<ProjectileController>();
 					projectile.Velocity = lookingDirection;
 					projectile.Owner = gameObject;
-					Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+					Physics.IgnoreCollision(projectile.GetComponent<Collider>(), GetComponent<Collider>());
 					isIll = false;
 				}
 				
@@ -83,7 +83,7 @@ namespace Assets.Scripts
 				}
 			}
 
-			text.text = "" + (int) lifetime;
+			text.text = "" + (int)Mathf.Ceil(lifetime);
 		}
 	}
 }
