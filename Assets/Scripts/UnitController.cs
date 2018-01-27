@@ -19,8 +19,6 @@ namespace Assets.Scripts
 		[SerializeField] private bool hasBall;
 
 		[SerializeField] private float minScaleFraction = 0.3f;
-
-		[SerializeField] private ParticleSystem sickness = null;
 		
 		private float lifetime;
 		private Rigidbody body;

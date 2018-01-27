@@ -9,6 +9,9 @@ namespace Assets.Scripts
 		[SerializeField] private int index = -1;
 
 		[SerializeField]  List<UnitController> units = new List<UnitController>();
+
+		[SerializeField] private GameObject tombstone = null;
+		
 		private int currentUnitIndex = -1;
 
 		public List<UnitController> Units
@@ -67,6 +70,8 @@ namespace Assets.Scripts
 						--currentUnitIndex;
 				}
 			}
+
+			Instantiate(tombstone, unit.transform.position, unit.transform.rotation);
 			Destroy(unit.gameObject);
 
 			if (units.Count == 0)

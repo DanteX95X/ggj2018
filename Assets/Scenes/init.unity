@@ -173,7 +173,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &128484438
 GameObject:
@@ -504,6 +504,11 @@ Prefab:
       propertyPath: m_Name
       value: Unit (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 54337579623287906, guid: efe29f53f1bed4280ac900f5ad1beef8,
+        type: 2}
+      propertyPath: m_Drag
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: efe29f53f1bed4280ac900f5ad1beef8, type: 2}
   m_IsPrefabParent: 0
@@ -544,7 +549,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4165843100988470, guid: dcd6f4083996f487ba010173afe8d7ae, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 64646803892614452, guid: dcd6f4083996f487ba010173afe8d7ae,
         type: 2}
@@ -729,6 +734,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 0
   units: []
+  tombstone: {fileID: 1659071044997856, guid: 7d257802c2fa747f3b852cc08fa8d7f2, type: 2}
 --- !u!4 &829087335
 Transform:
   m_ObjectHideFlags: 0
@@ -861,7 +867,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4165843100988470, guid: dcd6f4083996f487ba010173afe8d7ae, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1556267038284218, guid: dcd6f4083996f487ba010173afe8d7ae, type: 2}
       propertyPath: m_Name
@@ -924,6 +930,11 @@ Prefab:
       propertyPath: hasBall
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 54337579623287906, guid: efe29f53f1bed4280ac900f5ad1beef8,
+        type: 2}
+      propertyPath: m_Drag
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: efe29f53f1bed4280ac900f5ad1beef8, type: 2}
   m_IsPrefabParent: 0
@@ -957,6 +968,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 1
   units: []
+  tombstone: {fileID: 1659071044997856, guid: 7d257802c2fa747f3b852cc08fa8d7f2, type: 2}
 --- !u!4 &1416417149
 Transform:
   m_ObjectHideFlags: 0
@@ -1281,7 +1293,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4165843100988470, guid: dcd6f4083996f487ba010173afe8d7ae, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1556267038284218, guid: dcd6f4083996f487ba010173afe8d7ae, type: 2}
       propertyPath: m_Name
