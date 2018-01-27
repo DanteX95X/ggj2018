@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Assets.Scripts
 {
@@ -19,6 +21,8 @@ namespace Assets.Scripts
 		[SerializeField] private bool hasBall;
 
 		[SerializeField] private float minScaleFraction = 0.3f;
+
+		[SerializeField] private String unitName = "";
 		
 		private float lifetime;
 		private Rigidbody body;
@@ -59,6 +63,11 @@ namespace Assets.Scripts
 		public float Lifetime
 		{
 			get { return lifetime; }
+		}
+
+		public String UnitName
+		{
+			get { return unitName; }
 		}
 		
 		void Start()
@@ -123,7 +132,7 @@ namespace Assets.Scripts
 				}
 			}
 
-			text.text = "Unitname " + (int)Mathf.Ceil(lifetime);
+			text.text = "" + unitName + " " + (int)Mathf.Ceil(lifetime);
 			Vector3 minScale = minScaleFraction * scale;
 			float degenerationRatio = lifetime / initialLifetime;
 			transform.localScale = minScale + (scale-minScale)*degenerationRatio;

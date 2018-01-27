@@ -57,8 +57,7 @@ namespace Assets.Scripts
 			units[currentUnitIndex].IsActive = true;
 			units[currentUnitIndex].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
 		}
-
-		private static int ufo = 0;
+		
 		public void DestroyUnit(UnitController unit)
 		{	
 			if (unit == units[currentUnitIndex])
@@ -77,7 +76,7 @@ namespace Assets.Scripts
 				}
 			}
 
-			messageBox.Message = "Unitname has died!" + ufo++;
+			messageBox.Message = "" + unit.UnitName + " ciągnie druta w zaświatach.";
 			Instantiate(tombstone, unit.transform.position, unit.transform.rotation);
 			Destroy(unit.gameObject);
 

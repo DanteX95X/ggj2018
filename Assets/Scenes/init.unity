@@ -164,6 +164,11 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 0.19999999
       objectReference: {fileID: 0}
+    - target: {fileID: 114742684407220982, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
+        type: 2}
+      propertyPath: unitName
+      value: Gnom
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 007fb5ae1fc4c4164b5fd81e165d2c10, type: 2}
   m_IsPrefabParent: 0
@@ -458,6 +463,11 @@ Prefab:
       propertyPath: m_Name
       value: UnitMesh (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114742684407220982, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
+        type: 2}
+      propertyPath: unitName
+      value: Pedokopter
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 007fb5ae1fc4c4164b5fd81e165d2c10, type: 2}
   m_IsPrefabParent: 0
@@ -638,6 +648,11 @@ Prefab:
     - target: {fileID: 4653553068657072, guid: 007fb5ae1fc4c4164b5fd81e165d2c10, type: 2}
       propertyPath: m_LocalScale.y
       value: 0.19999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 114742684407220982, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
+        type: 2}
+      propertyPath: unitName
+      value: Brzeszczot
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 007fb5ae1fc4c4164b5fd81e165d2c10, type: 2}
@@ -941,6 +956,11 @@ Prefab:
     - target: {fileID: 4906756636569038, guid: 007fb5ae1fc4c4164b5fd81e165d2c10, type: 2}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114742684407220982, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
+        type: 2}
+      propertyPath: unitName
+      value: Grzybek
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 007fb5ae1fc4c4164b5fd81e165d2c10, type: 2}
@@ -1489,6 +1509,7 @@ GameObject:
   - component: {fileID: 2128058972}
   - component: {fileID: 2128058974}
   - component: {fileID: 2128058973}
+  - component: {fileID: 2128058975}
   m_Layer: 5
   m_Name: MessageBox
   m_TagString: Untagged
@@ -1553,3 +1574,15 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2128058971}
+--- !u!114 &2128058975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2128058971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e581fd028d624484ac156acec570012, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  messageTime: 2
