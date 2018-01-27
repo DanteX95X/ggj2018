@@ -56,6 +56,11 @@ namespace Assets.Scripts
 			set { isActive = value; }
 		}
 
+		public float Lifetime
+		{
+			get { return lifetime; }
+		}
+		
 		void Start()
 		{
 			lifetime = initialLifetime;

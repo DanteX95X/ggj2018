@@ -10,6 +10,16 @@ namespace Assets.Scripts
 
 		[SerializeField]  List<UnitController> units = new List<UnitController>();
 		private int currentUnitIndex = -1;
+
+		public List<UnitController> Units
+		{
+			get { return units; }
+		}
+
+		public int Index
+		{
+			get { return index; }
+		}
 		
 		void Start()
 		{
