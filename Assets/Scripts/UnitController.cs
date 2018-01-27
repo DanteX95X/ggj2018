@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,8 @@ namespace Assets.Scripts
 		[SerializeField] private GameObject projectilePrefab = null;
 
 		[SerializeField] private bool isIll;
+
+		[SerializeField] private float minScaleFraction = 0.3f;
 		
 		private float lifetime;
 		private Rigidbody body;
@@ -23,6 +26,7 @@ namespace Assets.Scripts
 		private bool isActive = false;
 		
 		private TextMesh text = null;
+		private Vector3 scale;
 
 		public bool IsIll
 		{
@@ -46,6 +50,7 @@ namespace Assets.Scripts
 			body = GetComponent<Rigidbody>();
 			text = GetComponentInChildren<TextMesh>();
 			GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+			scale = transform.localScale;
 		}
 
 		void Update()
@@ -84,6 +89,9 @@ namespace Assets.Scripts
 			}
 
 			text.text = "" + (int)Mathf.Ceil(lifetime);
+			Vector3 minScale = minScaleFraction * scale;
+			float degenerationRatio = lifetime / initialLifetime;
+			transform.localScale = minScale + (scale-minScale)*degenerationRatio;
 		}
 	}
 }
