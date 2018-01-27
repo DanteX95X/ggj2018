@@ -51,7 +51,9 @@ namespace Assets.Scripts
 			UnitController unit = other.collider.gameObject.GetComponent<UnitController>();
 			if (unit != null)
 			{
-				Destroy(other.collider.gameObject);
+				if(!unit.IsIll)
+					unit.IsIll = true;
+				owner.GetComponent<UnitController>().IsIll = false;
 				Destroy(gameObject);
 			}
 		}

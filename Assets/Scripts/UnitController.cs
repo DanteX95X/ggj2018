@@ -15,14 +15,25 @@ namespace Assets.Scripts
 		[SerializeField] private GameObject projectilePrefab = null;
 
 		[SerializeField] private int owner;
+
+		[SerializeField] private bool isIll;
 		
 		private float lifetime;
 		private Rigidbody2D body;
+		
+		private TextMesh text = null;
+
+		public bool IsIll
+		{
+			get { return isIll; }
+			set { isIll = value; }
+		}
 		
 		void Start()
 		{
 			lifetime = initialLifetime;
 			body = GetComponent<Rigidbody2D>();
+			text = GetComponentInChildren<TextMesh>();
 		}
 
 		void Update()
@@ -40,13 +51,18 @@ namespace Assets.Scripts
 				projectile.Owner = gameObject;
 				Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), GetComponent<Collider2D>());
 			}
-			
-			lifetime -= Time.deltaTime;
-			if (lifetime <= 0)
-				Debug.Log("Bang");
-			else
-				Debug.Log(""+ (int)lifetime);
-			
+
+			if (isIll)
+			{
+				lifetime -= Time.deltaTime;
+				if (lifetime <= 0)
+				{
+					Debug.Log("Bang");
+					Destroy(gameObject);
+				}
+			}
+
+			text.text = "" + (int) lifetime;
 		}
 	}
 }
