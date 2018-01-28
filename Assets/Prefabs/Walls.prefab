@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4226420881581084}
   - component: {fileID: 33343761662185068}
   - component: {fileID: 23535386353601738}
-  - component: {fileID: 54907641360327572}
   - component: {fileID: 64511326315738658}
   m_Layer: 0
   m_Name: Walls
@@ -84,28 +83,13 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1445088943187686}
   m_Mesh: {fileID: 4300000, guid: 3ceddae2ef3d640b1b6045cd87b0ce02, type: 3}
---- !u!54 &54907641360327572
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1445088943187686}
-  serializedVersion: 2
-  m_Mass: 10000
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 1
 --- !u!64 &64511326315738658
 MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1445088943187686}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 59be54016d68f4a659921ab680d1f82a, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
