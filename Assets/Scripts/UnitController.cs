@@ -24,6 +24,8 @@ namespace Assets.Scripts
 		[SerializeField] private float minScaleFraction = 0.3f;
 
 		[SerializeField] private String unitName = "";
+
+		[SerializeField] private List<AudioClip> sneezeSounds = new List<AudioClip>();
 		
 		private float lifetime;
 		private Rigidbody body;
@@ -198,12 +200,12 @@ namespace Assets.Scripts
 			ParticleSystem particles = GetComponentInChildren<ParticleSystem>();
 	        particles.transform.position = projectile.transform.position;// + new Vector3(0, 0, 0.2f);
 			particles.transform.parent = projectile.transform;
-			//particles.transform.localScale = new Vector3(1, 1, 1);
-	        //particles.transform.localScale *= 0.1f;
-	        //particles.transform.position = Vector3.zero;
+
+	        int index = Random.Range(0, sneezeSounds.Count);
+	        GetComponent<AudioSource>().PlayOneShot(sneezeSounds[index]);
 
 			animator.SetTrigger("Shoot");
-
-		}
+	        FindObjectOfType<GameplayController>().ShakeTime = 0.3f;
+        }
 	}
 }

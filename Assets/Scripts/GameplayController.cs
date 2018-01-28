@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Graphs;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,8 @@ namespace Assets.Scripts
 		[SerializeField] private float deadline = 60;
 		
 		[SerializeField] private Text timer = null;
+
+		[SerializeField] private float shakeStrenght = 5;
 
 		private List<Player> players = new List<Player>();
 
@@ -28,9 +31,17 @@ namespace Assets.Scripts
 
 		private GameObject survivor;
 
+		private float shakeTime = 0;
+		private Vector3 defaultPosition;
+		
 		public bool GameOver
 		{
 			get { return gameOver; }
+		}
+
+		public float ShakeTime
+		{
+			set { shakeTime = value; }
 		}
 
         void Start()
@@ -47,13 +58,19 @@ namespace Assets.Scripts
             audioSource.Play();
 			targetRotation = Camera.main.transform.rotation;
 			targetPosition = Camera.main.transform.position;
+			defaultPosition = Camera.main.transform.position;
 		}
 
 		void Update()
 		{
-			deadline -= Time.deltaTime;
-			timer.text = "" + (int)Mathf.Ceil(Mathf.Clamp(deadline, 0.0f, 10000.0f));
+			if (!gameOver)
+			{
+				deadline -= Time.deltaTime;
+				timer.text = "" + (int) Mathf.Ceil(Mathf.Clamp(deadline, 0.0f, 10000.0f));
+			}
 
+			ShakeScreen();
+			
 			if (gameOver)
 			{
 				targetPosition = survivor.transform.position + survivor.transform.forward * 2 + survivor.transform.up * 2;
@@ -143,6 +160,19 @@ namespace Assets.Scripts
 //			else if (index == -1)
 //				Debug.Log("Everybody died [*]");
 			return index;
+		}
+
+		void ShakeScreen()
+		{
+			if (shakeTime > 0)
+			{
+				shakeTime -= Time.deltaTime;
+				Camera.main.transform.position = defaultPosition;
+				Camera.main.transform.position += (new Vector3(Random.Range(-100.0f, 100.0f), Random.Range(-100.0f, 100.0f), Random.Range(-100.0f, 100.0f))).normalized * shakeStrenght;
+
+				if (shakeTime <= 0)
+					Camera.main.transform.position = defaultPosition;
+			}
 		}
 		
 	}
