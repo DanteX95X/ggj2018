@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Assets.Scripts
@@ -35,6 +36,8 @@ namespace Assets.Scripts
 		private GameObject[] waypoints;
 		private bool introDone = false;
 		private int waypointIndex = 0;
+
+		[SerializeField] private GameObject ui = null; 
 		
 		public bool GameOver
 		{
@@ -135,6 +138,11 @@ namespace Assets.Scripts
 					Destroy(text.gameObject);
 				}
 				
+				foreach (Transform button in ui.transform)
+				{
+					button.gameObject.SetActive(true);
+				}
+				
 				Debug.Log(survivor.GetComponent<UnitController>().UnitName);
 				Camera.main.projectionMatrix = Matrix4x4.Perspective(60, 16.0f/9.0f, 0.3f, 1000);
 			}
@@ -224,6 +232,15 @@ namespace Assets.Scripts
 			}
 		}
 
+		public void LoadMenu()
+		{
+			SceneManager.LoadScene(0);
+		}
+
+		public void LoadLevel()
+		{
+			SceneManager.LoadScene(1);
+		}
 
 	}
 }
