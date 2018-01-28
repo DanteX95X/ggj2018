@@ -14,9 +14,9 @@ namespace Assets.Scripts
 
 		private Rigidbody body;
 
-		private Vector2 velocity;
+        private Vector3 velocity;
 
-		private GameObject owner;
+        private GameObject owner;
 
 		private bool collisionEnabled = false;
 
@@ -24,9 +24,15 @@ namespace Assets.Scripts
 
 		private float lifetime;
 		
-		public Vector2 Velocity
-		{
-			set { velocity = value * speed; GetComponent<Rigidbody>().AddForce(velocity); }
+        public Vector3 Velocity
+        {
+            set
+            {
+                //Debug.Log("value" + ": " + value);
+                velocity = value * speed;
+                //Debug.Log("velocity" + ": " + velocity);
+                GetComponent<Rigidbody>().AddForce(velocity);
+            }
 		}
 
 		public GameObject Owner
