@@ -113,7 +113,9 @@ namespace Assets.Scripts
 
         void Update()
         {
-	        if (game.GameOver)
+	        GetComponentInChildren<TextMesh>().transform.rotation = Camera.main.transform.rotation;
+	        
+	       	if (game.GameOver)
 		        return;
 			
             if (isActive)
@@ -175,7 +177,7 @@ namespace Assets.Scripts
 			Vector3 minScale = minScaleFraction * scale;
 			float degenerationRatio = lifetime / initialLifetime;
 			transform.localScale = minScale + (scale-minScale)*degenerationRatio;
-		}
+        }
 
         void SpawnProjectile(Vector3 direction)
         {
