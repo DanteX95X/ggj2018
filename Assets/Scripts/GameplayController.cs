@@ -97,6 +97,8 @@ namespace Assets.Scripts
 						survivor = unit.gameObject;
 						unit.GetComponent<Animator>().SetBool("GameOver", true);
 					}
+
+					unit.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 				}
 				
 				gameOver = true;

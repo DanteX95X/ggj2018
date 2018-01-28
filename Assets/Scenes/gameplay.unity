@@ -1021,6 +1021,11 @@ Prefab:
       propertyPath: timer
       value: 
       objectReference: {fileID: 203505142}
+    - target: {fileID: 114388129849495350, guid: 3a257da273b6d2e448d5cbaf7374a4a7,
+        type: 2}
+      propertyPath: shakeStrenght
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3a257da273b6d2e448d5cbaf7374a4a7, type: 2}
   m_IsPrefabParent: 0
