@@ -38,7 +38,7 @@ namespace Assets.Scripts
         
         private PlayerRotation rotator;
 
-		private Game game;
+		private GameplayController game;
 
         void Awake()
         {
@@ -94,7 +94,7 @@ namespace Assets.Scripts
 				isIll = true;
 
 			animator = GetComponent<Animator>();
-			game = FindObjectOfType<Game>();
+			game = FindObjectOfType<GameplayController>();
 		}
 
         // FixedUpdate is at fixed intervals - used for physics
