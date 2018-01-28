@@ -112,6 +112,11 @@ namespace Assets.Scripts
                     //turn
                     rotator.Turning();
                 }
+                else
+                {
+	                Quaternion target = Quaternion.LookRotation(new Vector3(Input.GetAxis("Horizontal" + owner + "R"), 0, Input.GetAxis("Vertical" + owner + "R")));
+	                body.MoveRotation(target);
+                }
             }
         }
 
