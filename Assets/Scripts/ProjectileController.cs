@@ -12,8 +12,6 @@ namespace Assets.Scripts
 
 		[SerializeField] private float growthTime = 10;
 
-		private Rigidbody body;
-
         private Vector3 velocity;
 
         private GameObject owner;
@@ -23,7 +21,9 @@ namespace Assets.Scripts
 		private Vector3 scale;
 
 		private float lifetime;
-		
+
+        [SerializeField] private List<AudioClip> bouncySounds = new List<AudioClip>();
+
         public Vector3 Velocity
         {
             set
@@ -42,7 +42,6 @@ namespace Assets.Scripts
 
 		private void Start()
 		{
-			body = GetComponent<Rigidbody>();
 			collisionEnabled = false;
 			scale = transform.localScale;
 			lifetime = 0;
@@ -66,10 +65,11 @@ namespace Assets.Scripts
 				Debug.Log("Destroyed" + unit.UnitName);
 				if(owner != null)
 					owner.GetComponent<UnitController>().IsIll = false;
-				//if(!unit.IsIll)
-				unit.HasBall = true;
 
-				ParticleSystem particles = GetComponentInChildren<ParticleSystem>();
+				unit.HasBall = true;
+                unit.GetHit();
+                
+                ParticleSystem particles = GetComponentInChildren<ParticleSystem>();
 				particles.transform.position = unit.transform.position + new Vector3(0, 0, 0.2f);
 				particles.transform.parent = unit.transform;
 				particles.transform.localScale = new Vector3(1, 1, 1);
@@ -82,8 +82,10 @@ namespace Assets.Scripts
 				Physics.IgnoreCollision(GetComponent<Collider>(), owner.GetComponent<Collider>(), false);
 				collisionEnabled = true;
 			}
-			
-			GetComponent<AudioSource>().Play();
+
+            int index = Random.Range(0, bouncySounds.Count);
+            GetComponent<AudioSource>().PlayOneShot(bouncySounds[index]);
+
 		}
 	}
 }

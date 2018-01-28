@@ -153,6 +153,12 @@ MonoBehaviour:
   speed: 250
   maxScaleFraction: 10
   growthTime: 10
+  bouncySounds:
+  - {fileID: 8300000, guid: 0f16bc4722efc5b439b61e2f7d0453e7, type: 3}
+  - {fileID: 8300000, guid: 704e979a65f640e479ed4fc536e269e9, type: 3}
+  - {fileID: 8300000, guid: 8dada0ec1465ba944871bc7c5dfdfaf7, type: 3}
+  - {fileID: 8300000, guid: 5607e50b2f30b05449d4bc905c6ac43f, type: 3}
+  - {fileID: 8300000, guid: 855af829f8a926a41af6e4fcfa1e949e, type: 3}
 --- !u!135 &135297929572752916
 SphereCollider:
   m_ObjectHideFlags: 1

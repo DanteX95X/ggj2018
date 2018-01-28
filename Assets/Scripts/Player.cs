@@ -17,7 +17,11 @@ namespace Assets.Scripts
 		
 		private int currentUnitIndex = -1;
 
-		public List<UnitController> Units
+        [SerializeField] private List<AudioClip> deathSounds = new List<AudioClip>();
+        
+        public Color color = Color.black;
+        
+        public List<UnitController> Units
 		{
 			get { return units; }
 		}
@@ -29,11 +33,16 @@ namespace Assets.Scripts
 		
 		void Start()
 		{
+            // gain ownership over all child units
 			foreach (Transform child in transform)
 			{
 				UnitController unit = child.GetComponent<UnitController>();
 				unit.Owner = index;
-				units.Add(unit);
+
+                unit.fillBackgroundColor.GetComponent<Image>().color = color;
+                unit.fillFillColor.GetComponent<Image>().color = color;
+
+                units.Add(unit);
 			}
 
 			currentUnitIndex = 0;
@@ -48,12 +57,14 @@ namespace Assets.Scripts
 		{
 			if (units.Count == 0)
 				return;
-			
-			units[currentUnitIndex].IsActive = false;
+
+            units[currentUnitIndex].healthBar.SetActive(false);
+            units[currentUnitIndex].IsActive = false;
 
 			++currentUnitIndex;
 			currentUnitIndex %= units.Count;
 			units[currentUnitIndex].IsActive = true;
+            units[currentUnitIndex].healthBar.SetActive(true);
 
         }
 
@@ -84,7 +95,9 @@ namespace Assets.Scripts
 				FindObjectOfType<GameplayController>().RegisterPlayerDeath(index);
 			}
 
-			GetComponent<AudioSource>().Play();
+            int soundsIndex = Random.Range(0, deathSounds.Count);
+            GetComponent<AudioSource>().PlayOneShot(deathSounds[soundsIndex]);
+
 		}
 		
 		void Update()

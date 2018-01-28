@@ -185,6 +185,16 @@ Prefab:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 224308447127283340, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224308447127283340, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 007fb5ae1fc4c4164b5fd81e165d2c10, type: 2}
   m_IsPrefabParent: 0
@@ -451,7 +461,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4615698762361172, guid: f6561b4ffdee3ec47b3fcc5941039c51, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.88
+      value: -0.12
       objectReference: {fileID: 0}
     - target: {fileID: 4615698762361172, guid: f6561b4ffdee3ec47b3fcc5941039c51, type: 2}
       propertyPath: m_LocalPosition.y
@@ -459,7 +469,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4615698762361172, guid: f6561b4ffdee3ec47b3fcc5941039c51, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0.56
+      value: 1.43
       objectReference: {fileID: 0}
     - target: {fileID: 4615698762361172, guid: f6561b4ffdee3ec47b3fcc5941039c51, type: 2}
       propertyPath: m_LocalRotation.x
@@ -561,6 +571,16 @@ Prefab:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 224308447127283340, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224308447127283340, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 007fb5ae1fc4c4164b5fd81e165d2c10, type: 2}
   m_IsPrefabParent: 0
@@ -569,6 +589,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4615698762361172, guid: f6561b4ffdee3ec47b3fcc5941039c51,
     type: 2}
   m_PrefabInternal: {fileID: 283439720}
+--- !u!1 &603374546 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1349137885857944, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
+    type: 2}
+  m_PrefabInternal: {fileID: 1052981737}
 --- !u!1 &745382639
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,6 +830,25 @@ Prefab:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 224308447127283340, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224308447127283340, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224501747787726958, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1535662924719272, guid: 007fb5ae1fc4c4164b5fd81e165d2c10, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 007fb5ae1fc4c4164b5fd81e165d2c10, type: 2}
   m_IsPrefabParent: 0
@@ -840,6 +884,10 @@ MonoBehaviour:
   units: []
   tombstone: {fileID: 1659071044997856, guid: 7d257802c2fa747f3b852cc08fa8d7f2, type: 2}
   messageBox: {fileID: 0}
+  deathSounds:
+  - {fileID: 8300000, guid: 433660348e92d8c4bb77232d506c68c0, type: 3}
+  - {fileID: 8300000, guid: 34c2a1175f7b42f4db2493227899753b, type: 3}
+  color: {r: 1, g: 0, b: 0, a: 1}
 --- !u!4 &829087335
 Transform:
   m_ObjectHideFlags: 0
@@ -1102,6 +1150,35 @@ Prefab:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 224308447127283340, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224308447127283340, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224501747787726958, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1535662924719272, guid: 007fb5ae1fc4c4164b5fd81e165d2c10, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114742684407220982, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
+        type: 2}
+      propertyPath: fillBackgroundColor
+      value: 
+      objectReference: {fileID: 603374546}
+    - target: {fileID: 114742684407220982, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
+        type: 2}
+      propertyPath: fillFillColor
+      value: 
+      objectReference: {fileID: 1542866002}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 007fb5ae1fc4c4164b5fd81e165d2c10, type: 2}
   m_IsPrefabParent: 0
@@ -1242,6 +1319,10 @@ MonoBehaviour:
   units: []
   tombstone: {fileID: 1659071044997856, guid: 7d257802c2fa747f3b852cc08fa8d7f2, type: 2}
   messageBox: {fileID: 0}
+  deathSounds:
+  - {fileID: 8300000, guid: 433660348e92d8c4bb77232d506c68c0, type: 3}
+  - {fileID: 8300000, guid: 34c2a1175f7b42f4db2493227899753b, type: 3}
+  color: {r: 0.5019608, g: 1, b: 0.5019608, a: 1}
 --- !u!4 &1416417149
 Transform:
   m_ObjectHideFlags: 0
@@ -1337,6 +1418,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!1 &1542866002 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1508961334696154, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
+    type: 2}
+  m_PrefabInternal: {fileID: 1052981737}
 --- !u!1 &1566649385
 GameObject:
   m_ObjectHideFlags: 0

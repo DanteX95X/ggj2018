@@ -26,8 +26,9 @@ namespace Assets.Scripts
 		[SerializeField] private String unitName = "";
 
 		[SerializeField] private List<AudioClip> sneezeSounds = new List<AudioClip>();
-		
-		private float lifetime;
+        [SerializeField] private List<AudioClip> hurtSounds = new List<AudioClip>();
+
+        private float lifetime;
 		private Rigidbody body;
 		private int owner;
 		[SerializeField] bool isActive = false;
@@ -43,6 +44,10 @@ namespace Assets.Scripts
 		private GameplayController game;
 
 		private bool isReady = false;
+
+        public GameObject healthBar;
+        public GameObject fillBackgroundColor;
+        public GameObject fillFillColor;
 
         void Awake()
         {
@@ -116,7 +121,13 @@ namespace Assets.Scripts
             }
         }
 
-        void Update()
+        public void GetHit()
+        {
+            int index = Random.Range(0, hurtSounds.Count);
+            GetComponent<AudioSource>().PlayOneShot(hurtSounds[index]);
+        }
+
+    void Update()
         {   
 	       	if (game.GameOver || !isReady)
 		        return;
