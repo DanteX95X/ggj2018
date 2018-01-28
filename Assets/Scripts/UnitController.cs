@@ -38,7 +38,7 @@ namespace Assets.Scripts
         
         private PlayerRotation rotator;
 
-		private Game game;
+		private GameplayController game;
 
         void Awake()
         {
@@ -94,7 +94,7 @@ namespace Assets.Scripts
 				isIll = true;
 
 			animator = GetComponent<Animator>();
-			game = FindObjectOfType<Game>();
+			game = FindObjectOfType<GameplayController>();
 		}
 
         // FixedUpdate is at fixed intervals - used for physics
@@ -112,10 +112,12 @@ namespace Assets.Scripts
         }
 
         void Update()
-        {
-	        if (game.GameOver)
+        {   
+	       	if (game.GameOver)
 		        return;
-			
+		
+	        GetComponentInChildren<TextMesh>().transform.rotation = Camera.main.transform.rotation;
+	        
             if (isActive)
 			{
                 // aim and shoot
@@ -175,7 +177,7 @@ namespace Assets.Scripts
 			Vector3 minScale = minScaleFraction * scale;
 			float degenerationRatio = lifetime / initialLifetime;
 			transform.localScale = minScale + (scale-minScale)*degenerationRatio;
-		}
+        }
 
         void SpawnProjectile(Vector3 direction)
         {
