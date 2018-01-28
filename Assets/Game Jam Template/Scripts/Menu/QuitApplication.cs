@@ -3,8 +3,17 @@ using System.Collections;
 
 public class QuitApplication : MonoBehaviour {
 
-	public void Quit()
+    public AudioSource audioSource;
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    public void Quit()
 	{
+        audioSource.Play();
+
 		//If we are running in a standalone build of the game
 	#if UNITY_STANDALONE
 		//Quit the application
