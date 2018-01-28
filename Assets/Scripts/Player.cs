@@ -81,7 +81,7 @@ namespace Assets.Scripts
 
 			if (units.Count == 0)
 			{
-				FindObjectOfType<Game>().RegisterPlayerDeath(index);
+				FindObjectOfType<GameplayController>().RegisterPlayerDeath(index);
 			}
 
 			GetComponent<AudioSource>().Play();

@@ -181,11 +181,14 @@ namespace Assets.Scripts
 
         void SpawnProjectile(Vector3 direction)
         {
-            
+
             //Debug.Log("Fired");
             //Debug.Log("direction" + ": " + direction);
 
-            ProjectileController projectile = (Instantiate(projectilePrefab, /*transform.position*/ new Vector3(transform.position.x, 2, transform.position.z), transform.rotation) as GameObject).GetComponent<ProjectileController>();
+            //float spawnHeight = 2;
+            float spawnHeight = 1;
+
+            ProjectileController projectile = (Instantiate(projectilePrefab, /*transform.position*/ new Vector3(transform.position.x, spawnHeight, transform.position.z), transform.rotation) as GameObject).GetComponent<ProjectileController>();
 			projectile.Velocity = direction;
 			projectile.Owner = gameObject;
 			Physics.IgnoreCollision(projectile.GetComponent<Collider>(), GetComponent<Collider>());
