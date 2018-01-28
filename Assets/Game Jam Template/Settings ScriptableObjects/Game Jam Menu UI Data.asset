@@ -26,5 +26,5 @@ MonoBehaviour:
     m_DisabledColor: {r: 0.56114835, g: 0.6628893, b: 0.71323526, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0
-  font: {fileID: 12800000, guid: b51a3e520f9164da198dc59c8acfccd6, type: 3}
+  font: {fileID: 12800000, guid: 20c36e54b6a864e2daa8d3ba21d78d37, type: 3}
   textColor: {r: 0.2310405, g: 0.13624568, b: 0.2647059, a: 1}
