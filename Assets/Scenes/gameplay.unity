@@ -1090,12 +1090,17 @@ Prefab:
     - target: {fileID: 224308447127283340, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224308447127283340, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224501747787726958, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 007fb5ae1fc4c4164b5fd81e165d2c10, type: 2}
@@ -1530,12 +1535,17 @@ Prefab:
     - target: {fileID: 224308447127283340, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224308447127283340, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224501747787726958, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 007fb5ae1fc4c4164b5fd81e165d2c10, type: 2}
@@ -1810,47 +1820,6 @@ Prefab:
     - target: {fileID: 1300592352940924, guid: 007fb5ae1fc4c4164b5fd81e165d2c10, type: 2}
       propertyPath: m_Name
       value: UnitMesh (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 114742684407220982, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
-        type: 2}
-      propertyPath: unitName
-      value: Pedokopter
-      objectReference: {fileID: 0}
-    - target: {fileID: 137135535288808888, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
-        type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f69e14aba5be4dc49a786ad384272466, type: 2}
-    - target: {fileID: 54499135598414930, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
-        type: 2}
-      propertyPath: m_UseGravity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 136264618060187738, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
-        type: 2}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114742684407220982, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1300592352940924, guid: 007fb5ae1fc4c4164b5fd81e165d2c10, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4653553068657072, guid: 007fb5ae1fc4c4164b5fd81e165d2c10, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.19999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 4653553068657072, guid: 007fb5ae1fc4c4164b5fd81e165d2c10, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 0.19999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 4653553068657072, guid: 007fb5ae1fc4c4164b5fd81e165d2c10, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 0.19999999
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 007fb5ae1fc4c4164b5fd81e165d2c10, type: 2}
@@ -2374,12 +2343,12 @@ Prefab:
     - target: {fileID: 224308447127283340, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224308447127283340, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 007fb5ae1fc4c4164b5fd81e165d2c10, type: 2}
