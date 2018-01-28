@@ -42,6 +42,8 @@ namespace Assets.Scripts
 
 		private GameplayController game;
 
+		private bool isReady = false;
+
         void Awake()
         {
             // Set up references.
@@ -104,7 +106,7 @@ namespace Assets.Scripts
         void FixedUpdate()
         {
             // turn active unity controlled by knm
-            if (isActive && !game.GameOver)
+	        if (isActive && (!game.GameOver || isReady))
             {
                 if (owner == 0) // keyboard and mouse
                 {
@@ -116,7 +118,7 @@ namespace Assets.Scripts
 
         void Update()
         {   
-	       	if (game.GameOver)
+	       	if (game.GameOver || !isReady)
 		        return;
 		
 	        GetComponentInChildren<TextMesh>().transform.rotation = Camera.main.transform.rotation;
@@ -207,5 +209,10 @@ namespace Assets.Scripts
 			animator.SetTrigger("Shoot");
 	        FindObjectOfType<GameplayController>().ShakeTime = 0.3f;
         }
+
+		void OnCollisionEnter(Collision other)
+		{
+			isReady = true;
+		}
 	}
 }
