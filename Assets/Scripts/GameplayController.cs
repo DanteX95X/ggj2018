@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
-	public class Game : MonoBehaviour
+	public class GameplayController : MonoBehaviour
 	{
 		[SerializeField] private float deadline = 60;
 		
