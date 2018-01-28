@@ -205,7 +205,7 @@ namespace Assets.Scripts
 	        GetComponent<AudioSource>().PlayOneShot(sneezeSounds[index]);
 
 			animator.SetTrigger("Shoot");
-
-		}
+	        FindObjectOfType<GameplayController>().ShakeTime = 0.3f;
+        }
 	}
 }
