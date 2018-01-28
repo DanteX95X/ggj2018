@@ -628,7 +628,7 @@ Prefab:
     - target: {fileID: 136264618060187738, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
         type: 2}
       propertyPath: m_Radius
-      value: 0.2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114742684407220982, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
         type: 2}
@@ -948,7 +948,7 @@ Prefab:
     - target: {fileID: 136264618060187738, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
         type: 2}
       propertyPath: m_Radius
-      value: 0.2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114742684407220982, guid: 007fb5ae1fc4c4164b5fd81e165d2c10,
         type: 2}
