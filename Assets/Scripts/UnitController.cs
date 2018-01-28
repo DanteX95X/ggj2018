@@ -111,7 +111,7 @@ namespace Assets.Scripts
         void FixedUpdate()
         {
             // turn active unity controlled by knm
-	        if (isActive && (!game.GameOver || isReady))
+	        if (isActive && (!game.GameOver && isReady))
             {
                 if (owner == 0) // keyboard and mouse
                 {
@@ -189,7 +189,7 @@ namespace Assets.Scripts
 				}
 			}
 
-			text.text = "" + unitName + " " + (int)Mathf.Ceil(lifetime);
+			text.text = "" + (int)Mathf.Ceil(lifetime);
 			Vector3 minScale = minScaleFraction * scale;
 			float degenerationRatio = lifetime / initialLifetime;
 			transform.localScale = minScale + (scale-minScale)*degenerationRatio;

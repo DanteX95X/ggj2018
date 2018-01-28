@@ -34,6 +34,10 @@ namespace Assets.Scripts
 		private float shakeTime = 0;
 		private Vector3 defaultPosition;
 		
+		private GameObject[] waypoints;
+		private bool introDone = false;
+		private int waypointIndex = 0;
+		
 		public bool GameOver
 		{
 			get { return gameOver; }
@@ -58,15 +62,26 @@ namespace Assets.Scripts
             audioSource.Play();
 			targetRotation = Camera.main.transform.rotation;
 			targetPosition = Camera.main.transform.position;
-			defaultPosition = Camera.main.transform.position;
+			defaultPosition = GameObject.FindGameObjectWithTag("Respawn").transform.position;//Camera.main.transform.position;
+			//Time.timeScale = 0;
+			waypoints = GameObject.FindGameObjectsWithTag("Respawn");
+			introDone = false;
+			FindObjectOfType<MessageBox>().Message = "Get ready to sneeze!";
 		}
 
 		void Update()
 		{
+			Debug.Log("Update");
+			if (!introDone)
+			{
+				Intro();
+				return;
+			}
+			
 			if (!gameOver)
 			{
 				deadline -= Time.deltaTime;
-				timer.text = "" + (int) Mathf.Ceil(Mathf.Clamp(deadline, 0.0f, 10000.0f));
+				timer.text = "" + (int) Mathf.Ceil(Mathf.Clamp(deadline, -0.5f, 10000.0f));
 			}
 
 			ShakeScreen();
@@ -83,6 +98,7 @@ namespace Assets.Scripts
 			if (status != -2 && !gameOver)
 			{
 				Debug.Log("GameOver");
+				FindObjectOfType<MessageBox>().Message = "You won! You sick bastard!";
                 
                 audioSource.clip = gameOverMusic;
                 if (!audioSource.isPlaying)
@@ -95,7 +111,11 @@ namespace Assets.Scripts
 					if (unit.Owner == status)
 					{
 						survivor = unit.gameObject;
-						unit.GetComponent<Animator>().SetBool("GameOver", true);
+						unit.GetComponent<Animator>().SetTrigger("Win");
+					}
+					else
+					{
+						unit.GetComponent<Animator>().SetTrigger("Loss");
 					}
 
 					unit.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
@@ -168,10 +188,6 @@ namespace Assets.Scripts
 				}
 			}
 			
-//			if(index >= 0)
-//				Debug.Log("Player" + index + " won!");
-//			else if (index == -1)
-//				Debug.Log("Everybody died [*]");
 			return index;
 		}
 
@@ -187,6 +203,29 @@ namespace Assets.Scripts
 					Camera.main.transform.position = defaultPosition;
 			}
 		}
-		
+
+		void Intro()
+		{
+			Debug.Log("intro");
+			targetPosition = waypoints[waypointIndex].transform.position;
+			Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, targetPosition, Time.deltaTime);
+			targetRotation = waypoints[waypointIndex].transform.rotation;
+			Camera.main.transform.rotation = Quaternion.Slerp(Camera.main.transform.rotation, targetRotation, Time.deltaTime);
+
+			if ((Camera.main.transform.position - waypoints[waypointIndex].transform.position).magnitude < 0.5 &&
+			    (Camera.main.transform.rotation.eulerAngles.y - waypoints[waypointIndex].transform.rotation.eulerAngles.y) < 1)
+			{
+				Debug.Log("done");
+				FindObjectOfType<MessageBox>().Message = "May the sickest win!";
+				introDone = true;
+				foreach (var player in players)
+				{
+					foreach (Transform child in player.transform)
+						child.gameObject.SetActive(true);
+				}
+			}
+		}
+
+
 	}
 }

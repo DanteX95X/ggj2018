@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 250
-  maxScaleFraction: 10
+  maxScaleFraction: 5
   growthTime: 10
   bouncySounds:
   - {fileID: 8300000, guid: 0f16bc4722efc5b439b61e2f7d0453e7, type: 3}
