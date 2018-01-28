@@ -106,6 +106,11 @@ namespace Assets.Scripts
 				{
 					Destroy(projectile.gameObject);
 				}
+
+				foreach (var particles in FindObjectsOfType<ParticleSystem>())
+				{
+					Destroy(particles.gameObject);
+				}
 				Debug.Log(survivor.GetComponent<UnitController>().UnitName);
 				Camera.main.projectionMatrix = Matrix4x4.Perspective(60, 16.0f/9.0f, 0.3f, 1000);
 			}

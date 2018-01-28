@@ -76,7 +76,7 @@ namespace Assets.Scripts
 			}
 
 			messageBox.Message = "" + unit.UnitName + " ciągnie druta w zaświatach.";
-			Instantiate(tombstone, unit.transform.position, unit.transform.rotation);
+			Instantiate(tombstone, unit.transform.position, tombstone.transform.rotation);
 			Destroy(unit.gameObject);
 
 			if (units.Count == 0)
