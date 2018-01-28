@@ -66,6 +66,7 @@ namespace Assets.Scripts
 			//Time.timeScale = 0;
 			waypoints = GameObject.FindGameObjectsWithTag("Respawn");
 			introDone = false;
+			FindObjectOfType<MessageBox>().Message = "Get ready to sneeze!";
 		}
 
 		void Update()
@@ -80,7 +81,7 @@ namespace Assets.Scripts
 			if (!gameOver)
 			{
 				deadline -= Time.deltaTime;
-				timer.text = "" + (int) Mathf.Ceil(Mathf.Clamp(deadline, 0.0f, 10000.0f));
+				timer.text = "" + (int) Mathf.Ceil(Mathf.Clamp(deadline, -0.5f, 10000.0f));
 			}
 
 			ShakeScreen();
@@ -97,6 +98,7 @@ namespace Assets.Scripts
 			if (status != -2 && !gameOver)
 			{
 				Debug.Log("GameOver");
+				FindObjectOfType<MessageBox>().Message = "You won! You sick bastard!";
                 
                 audioSource.clip = gameOverMusic;
                 if (!audioSource.isPlaying)
@@ -186,10 +188,6 @@ namespace Assets.Scripts
 				}
 			}
 			
-//			if(index >= 0)
-//				Debug.Log("Player" + index + " won!");
-//			else if (index == -1)
-//				Debug.Log("Everybody died [*]");
 			return index;
 		}
 
@@ -218,6 +216,7 @@ namespace Assets.Scripts
 			    (Camera.main.transform.rotation.eulerAngles.y - waypoints[waypointIndex].transform.rotation.eulerAngles.y) < 1)
 			{
 				Debug.Log("done");
+				FindObjectOfType<MessageBox>().Message = "May the sickest win!";
 				introDone = true;
 				foreach (var player in players)
 				{
