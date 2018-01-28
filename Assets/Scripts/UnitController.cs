@@ -65,6 +65,7 @@ namespace Assets.Scripts
 
 		public int Owner
 		{
+			get { return owner; }
 			set { owner = value; }
 		}
 		

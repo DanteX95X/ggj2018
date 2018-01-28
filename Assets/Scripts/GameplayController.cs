@@ -62,7 +62,8 @@ namespace Assets.Scripts
 				Camera.main.transform.rotation = Quaternion.Slerp(Camera.main.transform.rotation, targetRotation, Time.deltaTime);	
 			}
 
-			if (isGameOver() != -2 && !gameOver)
+			int status = isGameOver();
+			if (status != -2 && !gameOver)
 			{
 				Debug.Log("GameOver");
                 
@@ -72,9 +73,15 @@ namespace Assets.Scripts
                     audioSource.Play();
                 }
 
-				survivor = FindObjectOfType<UnitController>().gameObject;
-				//Camera.main.gameObject.transform.position = survivor.transform.position + survivor.transform.forward*5 + survivor.transform.up * 5;
-				//Camera.main.transform.LookAt(survivor.transform);
+				foreach (UnitController unit in FindObjectsOfType<UnitController>())
+				{
+					if (unit.Owner == status)
+					{
+						survivor = unit.gameObject;
+						unit.GetComponent<Animator>().SetBool("GameOver", true);
+					}
+				}
+				
 				gameOver = true;
 				foreach (var projectile in FindObjectsOfType<ProjectileController>())
 				{
