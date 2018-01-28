@@ -178,7 +178,7 @@ namespace Assets.Scripts
 				}
 			}
 
-			text.text = "" + unitName + " " + (int)Mathf.Ceil(lifetime);
+			text.text = "" + (int)Mathf.Ceil(lifetime);
 			Vector3 minScale = minScaleFraction * scale;
 			float degenerationRatio = lifetime / initialLifetime;
 			transform.localScale = minScale + (scale-minScale)*degenerationRatio;

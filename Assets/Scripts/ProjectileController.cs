@@ -72,7 +72,7 @@ namespace Assets.Scripts
 				ParticleSystem particles = GetComponentInChildren<ParticleSystem>();
 				particles.transform.position = unit.transform.position + new Vector3(0, 0, 0.2f);
 				particles.transform.parent = unit.transform;
-				particles.transform.localScale = new Vector3(1, 1, 1);
+				particles.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
 				
 				Destroy(gameObject);
 				return;
