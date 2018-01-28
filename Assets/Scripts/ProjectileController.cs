@@ -53,7 +53,9 @@ namespace Assets.Scripts
 		private void Update()
 		{
 			lifetime += Time.deltaTime;
-			transform.localScale = scale *(1 + (maxScaleFraction-1) * Mathf.Clamp(lifetime/growthTime, 0, 1));
+			Vector3 targetScale = scale *(1 + (maxScaleFraction-1) * Mathf.Clamp(lifetime/growthTime, 0, 1));
+			transform.localScale = targetScale;
+			GetComponentInChildren<ParticleSystem>().transform.localScale = targetScale * 0.1f;
 		}
 
 		private void OnCollisionEnter(Collision other)
@@ -61,7 +63,7 @@ namespace Assets.Scripts
 			UnitController unit = other.collider.gameObject.GetComponent<UnitController>();
 			if (unit != null && !unit.HasBall)
 			{
-				Debug.Log("Destroyed");
+				Debug.Log("Destroyed" + unit.UnitName);
 				if(owner != null)
 					owner.GetComponent<UnitController>().IsIll = false;
 				//if(!unit.IsIll)

@@ -188,16 +188,18 @@ namespace Assets.Scripts
             //Debug.Log("Fired");
             //Debug.Log("direction" + ": " + direction);
 
-            ProjectileController projectile = (Instantiate(projectilePrefab, transform.position, transform.rotation) as GameObject).GetComponent<ProjectileController>();
+            ProjectileController projectile = (Instantiate(projectilePrefab, /*transform.position*/ new Vector3(transform.position.x, 2, transform.position.z), transform.rotation) as GameObject).GetComponent<ProjectileController>();
 			projectile.Velocity = direction;
 			projectile.Owner = gameObject;
 			Physics.IgnoreCollision(projectile.GetComponent<Collider>(), GetComponent<Collider>());
 			hasBall = false;
 
 			ParticleSystem particles = GetComponentInChildren<ParticleSystem>();
-			particles.transform.position = projectile.transform.position + new Vector3(0, 0, 0.2f);
+	        particles.transform.position = projectile.transform.position;// + new Vector3(0, 0, 0.2f);
 			particles.transform.parent = projectile.transform;
-			particles.transform.localScale = new Vector3(1, 1, 1);
+			//particles.transform.localScale = new Vector3(1, 1, 1);
+	        //particles.transform.localScale *= 0.1f;
+	        //particles.transform.position = Vector3.zero;
 
 			animator.SetTrigger("Shoot");
 
