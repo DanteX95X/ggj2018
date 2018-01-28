@@ -14,9 +14,9 @@ namespace Assets.Scripts
 
 		private Rigidbody body;
 
-		private Vector2 velocity;
+        private Vector3 velocity;
 
-		private GameObject owner;
+        private GameObject owner;
 
 		private bool collisionEnabled = false;
 
@@ -24,9 +24,15 @@ namespace Assets.Scripts
 
 		private float lifetime;
 		
-		public Vector2 Velocity
-		{
-			set { velocity = value * speed; GetComponent<Rigidbody>().AddForce(velocity); }
+        public Vector3 Velocity
+        {
+            set
+            {
+                //Debug.Log("value" + ": " + value);
+                velocity = value * speed;
+                //Debug.Log("velocity" + ": " + velocity);
+                GetComponent<Rigidbody>().AddForce(velocity);
+            }
 		}
 
 		public GameObject Owner
@@ -47,7 +53,9 @@ namespace Assets.Scripts
 		private void Update()
 		{
 			lifetime += Time.deltaTime;
-			transform.localScale = scale *(1 + (maxScaleFraction-1) * Mathf.Clamp(lifetime/growthTime, 0, 1));
+			Vector3 targetScale = scale *(1 + (maxScaleFraction-1) * Mathf.Clamp(lifetime/growthTime, 0, 1));
+			transform.localScale = targetScale;
+			GetComponentInChildren<ParticleSystem>().transform.localScale = targetScale * 0.1f;
 		}
 
 		private void OnCollisionEnter(Collision other)
@@ -55,7 +63,7 @@ namespace Assets.Scripts
 			UnitController unit = other.collider.gameObject.GetComponent<UnitController>();
 			if (unit != null && !unit.HasBall)
 			{
-				Debug.Log("Destroyed");
+				Debug.Log("Destroyed" + unit.UnitName);
 				if(owner != null)
 					owner.GetComponent<UnitController>().IsIll = false;
 				//if(!unit.IsIll)

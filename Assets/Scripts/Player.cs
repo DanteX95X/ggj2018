@@ -38,7 +38,6 @@ namespace Assets.Scripts
 
 			currentUnitIndex = 0;
 			units[0].IsActive = true;
-			units[0].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
 
 			GetComponent<AudioSource>().playOnAwake = false;
 
@@ -51,14 +50,14 @@ namespace Assets.Scripts
 				return;
 			
 			units[currentUnitIndex].IsActive = false;
-			units[currentUnitIndex].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+
 			++currentUnitIndex;
 			currentUnitIndex %= units.Count;
 			units[currentUnitIndex].IsActive = true;
-			units[currentUnitIndex].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
-		}
-		
-		public void DestroyUnit(UnitController unit)
+
+        }
+
+        public void DestroyUnit(UnitController unit)
 		{	
 			if (unit == units[currentUnitIndex])
 			{
@@ -82,7 +81,7 @@ namespace Assets.Scripts
 
 			if (units.Count == 0)
 			{
-				FindObjectOfType<Game>().RegisterPlayerDeath(index);
+				FindObjectOfType<GameplayController>().RegisterPlayerDeath(index);
 			}
 
 			GetComponent<AudioSource>().Play();

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
-	public class Game : MonoBehaviour
+	public class GameplayController : MonoBehaviour
 	{
 		[SerializeField] private float deadline = 60;
 		
@@ -20,6 +20,13 @@ namespace Assets.Scripts
         public AudioClip gameOverMusic;
 
         private AudioSource audioSource;
+
+		private bool gameOver = false;
+
+		public bool GameOver
+		{
+			get { return gameOver; }
+		}
 
         void Start()
 		{
@@ -40,7 +47,7 @@ namespace Assets.Scripts
 			deadline -= Time.deltaTime;
 			timer.text = "" + (int)Mathf.Ceil(Mathf.Clamp(deadline, 0.0f, 10000.0f));
 
-			if (isGameOver() != -2)
+			if (isGameOver() != -2 && !gameOver)
 			{
 				Debug.Log("GameOver");
                 
@@ -50,7 +57,11 @@ namespace Assets.Scripts
                     audioSource.Play();
                 }
 
-            }
+				GameObject survivor = FindObjectOfType<UnitController>().gameObject;
+				Camera.main.gameObject.transform.position = survivor.transform.position + survivor.transform.forward*5 + survivor.transform.up * 5;
+				Camera.main.transform.LookAt(survivor.transform);
+				gameOver = true;
+			}
 
         }
 

@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -34,8 +35,18 @@ namespace Assets.Scripts
 		private bool isIll;
 
 		private Animator animator;
+        
+        private PlayerRotation rotator;
 
-		public bool IsIll
+		private Game game;
+
+        void Awake()
+        {
+            // Set up references.
+            rotator = GetComponent<PlayerRotation>();
+        }
+
+        public bool IsIll
 		{
 			get { return isIll; }
 			set { isIll = value; }
@@ -77,18 +88,34 @@ namespace Assets.Scripts
 			lifetime = initialLifetime;
 			body = GetComponent<Rigidbody>();
 			text = GetComponentInChildren<TextMesh>();
-			GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-			scale = transform.localScale;
+            scale = transform.localScale;
 			isIll = false;
 			if (hasBall)
 				isIll = true;
 
 			animator = GetComponent<Animator>();
+			game = FindObjectOfType<Game>();
 		}
 
-		void Update()
-		{
+        // FixedUpdate is at fixed intervals - used for physics
+        void FixedUpdate()
+        {
+            // turn active unity controlled by knm
+            if (isActive && !game.GameOver)
+            {
+                if (owner == 0) // keyboard and mouse
+                {
+                    //turn
+                    rotator.Turning();
+                }
+            }
+        }
 
+        void Update()
+        {
+	        if (game.GameOver)
+		        return;
+			
             if (isActive)
 			{
                 // aim and shoot
@@ -97,15 +124,16 @@ namespace Assets.Scripts
 
                     Vector2 mousePosition = Input.mousePosition;
 
-                    Vector2 lookingDirection;
+                    Vector3 lookingDirection;
 
-                    if (owner == 0)
+                    if (owner == 0) // keyboard and mouse
                     {
-                        lookingDirection = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane)) - transform.position;
+                        lookingDirection = transform.forward;
+
                     }
-                    else //(owner == 1)
+                    else //(owner == 1, 2, 3)
                     {
-                        lookingDirection = new Vector3(Input.GetAxis("Horizontal" + owner + "R"), Input.GetAxis("Vertical" + owner + "R"));
+                        lookingDirection = new Vector3(Input.GetAxis("Horizontal" + owner + "R"), 0, Input.GetAxis("Vertical" + owner + "R"));
                     }
 
                     lookingDirection.Normalize();
@@ -114,14 +142,19 @@ namespace Assets.Scripts
 				}
 
                 // player movement
-				Vector2 direction = new Vector2(Input.GetAxis("Horizontal" + owner), Input.GetAxis("Vertical" + owner)).normalized;
-				animator.SetFloat("Speed", direction.magnitude);
-                body.velocity =  direction * speed * Time.deltaTime;
-				
-			}
+                Vector3 direction = new Vector3(Input.GetAxis("Horizontal" + owner), 0, Input.GetAxis("Vertical" + owner)).normalized;
+
+                animator.SetFloat("Speed", direction.magnitude);
+
+                Vector3 movement = direction * speed * Time.deltaTime;
+                movement.y = body.velocity.y; // do not touch vertical movement, let gravity do its job
+
+                body.velocity = movement;
+
+            }
 
 
-			if (isIll)
+            if (isIll)
 			{
 				lifetime -= Time.deltaTime;
 				if (lifetime <= 0)
@@ -130,8 +163,8 @@ namespace Assets.Scripts
 					
 					if (hasBall)
 					{
-						Vector2 randomDirection = new Vector2(Random.Range(-100, 100), Random.Range(-100, 100)).normalized;
-						SpawnProjectile(randomDirection);
+                        Vector3 randomDirection = new Vector3(Random.Range(-100, 100), 0, Random.Range(-100, 100)).normalized;
+                        SpawnProjectile(randomDirection);
 					}
 
 					transform.parent.GetComponent<Player>().DestroyUnit(this);
@@ -144,18 +177,28 @@ namespace Assets.Scripts
 			transform.localScale = minScale + (scale-minScale)*degenerationRatio;
 		}
 
-		void SpawnProjectile(Vector2 direction)
-		{
-			Debug.Log("Fired");
-			ProjectileController projectile = (Instantiate(projectilePrefab, transform.position, transform.rotation) as GameObject).GetComponent<ProjectileController>();
+        void SpawnProjectile(Vector3 direction)
+        {
+
+            //Debug.Log("Fired");
+            //Debug.Log("direction" + ": " + direction);
+
+            //float spawnHeight = 2;
+            float spawnHeight = 1;
+
+            ProjectileController projectile = (Instantiate(projectilePrefab, /*transform.position*/ new Vector3(transform.position.x, spawnHeight, transform.position.z), transform.rotation) as GameObject).GetComponent<ProjectileController>();
 			projectile.Velocity = direction;
 			projectile.Owner = gameObject;
 			Physics.IgnoreCollision(projectile.GetComponent<Collider>(), GetComponent<Collider>());
 			hasBall = false;
+
 			ParticleSystem particles = GetComponentInChildren<ParticleSystem>();
-			particles.transform.position = projectile.transform.position + new Vector3(0, 0, 0.2f);
+	        particles.transform.position = projectile.transform.position;// + new Vector3(0, 0, 0.2f);
 			particles.transform.parent = projectile.transform;
-			particles.transform.localScale = new Vector3(1, 1, 1);
+			//particles.transform.localScale = new Vector3(1, 1, 1);
+	        //particles.transform.localScale *= 0.1f;
+	        //particles.transform.position = Vector3.zero;
+
 			animator.SetTrigger("Shoot");
 
 		}
