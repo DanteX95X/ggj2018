@@ -24,6 +24,8 @@ namespace Assets.Scripts
 		[SerializeField] private float minScaleFraction = 0.3f;
 
 		[SerializeField] private String unitName = "";
+
+		[SerializeField] private List<AudioClip> sneezeSounds = new List<AudioClip>();
 		
 		private float lifetime;
 		private Rigidbody body;
@@ -65,6 +67,7 @@ namespace Assets.Scripts
 
 		public int Owner
 		{
+			get { return owner; }
 			set { owner = value; }
 		}
 		
@@ -112,10 +115,12 @@ namespace Assets.Scripts
         }
 
         void Update()
-        {
-	        if (game.GameOver)
+        {   
+	       	if (game.GameOver)
 		        return;
-			
+		
+	        GetComponentInChildren<TextMesh>().transform.rotation = Camera.main.transform.rotation;
+	        
             if (isActive)
 			{
                 // aim and shoot
@@ -175,7 +180,7 @@ namespace Assets.Scripts
 			Vector3 minScale = minScaleFraction * scale;
 			float degenerationRatio = lifetime / initialLifetime;
 			transform.localScale = minScale + (scale-minScale)*degenerationRatio;
-		}
+        }
 
         void SpawnProjectile(Vector3 direction)
         {
@@ -195,12 +200,12 @@ namespace Assets.Scripts
 			ParticleSystem particles = GetComponentInChildren<ParticleSystem>();
 	        particles.transform.position = projectile.transform.position;// + new Vector3(0, 0, 0.2f);
 			particles.transform.parent = projectile.transform;
-			//particles.transform.localScale = new Vector3(1, 1, 1);
-	        //particles.transform.localScale *= 0.1f;
-	        //particles.transform.position = Vector3.zero;
+
+	        int index = Random.Range(0, sneezeSounds.Count);
+	        GetComponent<AudioSource>().PlayOneShot(sneezeSounds[index]);
 
 			animator.SetTrigger("Shoot");
-
-		}
+	        FindObjectOfType<GameplayController>().ShakeTime = 0.3f;
+        }
 	}
 }
