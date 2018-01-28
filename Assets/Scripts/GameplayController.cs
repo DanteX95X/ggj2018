@@ -109,7 +109,11 @@ namespace Assets.Scripts
 					if (unit.Owner == status)
 					{
 						survivor = unit.gameObject;
-						unit.GetComponent<Animator>().SetBool("GameOver", true);
+						unit.GetComponent<Animator>().SetTrigger("Win");
+					}
+					else
+					{
+						unit.GetComponent<Animator>().SetTrigger("Loss");
 					}
 
 					unit.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
