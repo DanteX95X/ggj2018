@@ -23,6 +23,11 @@ namespace Assets.Scripts
 
 		private bool gameOver = false;
 
+		private Quaternion targetRotation;
+		private Vector3 targetPosition;
+
+		private GameObject survivor;
+
 		public bool GameOver
 		{
 			get { return gameOver; }
@@ -40,12 +45,22 @@ namespace Assets.Scripts
             //audioSource.playOnAwake = true;
             audioSource.clip = gameMusic;
             audioSource.Play();
-        }
+			targetRotation = Camera.main.transform.rotation;
+			targetPosition = Camera.main.transform.position;
+		}
 
 		void Update()
 		{
 			deadline -= Time.deltaTime;
 			timer.text = "" + (int)Mathf.Ceil(Mathf.Clamp(deadline, 0.0f, 10000.0f));
+
+			if (gameOver)
+			{
+				targetPosition = survivor.transform.position + survivor.transform.forward * 2 + survivor.transform.up * 2;
+				Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, targetPosition, Time.deltaTime);
+				targetRotation = Quaternion.LookRotation(survivor.transform.position - Camera.main.transform.position);
+				Camera.main.transform.rotation = Quaternion.Slerp(Camera.main.transform.rotation, targetRotation, Time.deltaTime);	
+			}
 
 			if (isGameOver() != -2 && !gameOver)
 			{
@@ -57,10 +72,16 @@ namespace Assets.Scripts
                     audioSource.Play();
                 }
 
-				GameObject survivor = FindObjectOfType<UnitController>().gameObject;
-				Camera.main.gameObject.transform.position = survivor.transform.position + survivor.transform.forward*5 + survivor.transform.up * 5;
-				Camera.main.transform.LookAt(survivor.transform);
+				survivor = FindObjectOfType<UnitController>().gameObject;
+				//Camera.main.gameObject.transform.position = survivor.transform.position + survivor.transform.forward*5 + survivor.transform.up * 5;
+				//Camera.main.transform.LookAt(survivor.transform);
 				gameOver = true;
+				foreach (var projectile in FindObjectsOfType<ProjectileController>())
+				{
+					Destroy(projectile.gameObject);
+				}
+				Debug.Log(survivor.GetComponent<UnitController>().UnitName);
+				Camera.main.projectionMatrix = Matrix4x4.Perspective(60, 16.0f/9.0f, 0.3f, 1000);
 			}
 
         }
@@ -110,10 +131,10 @@ namespace Assets.Scripts
 				}
 			}
 			
-			if(index >= 0)
-				Debug.Log("Player" + index + " won!");
-			else if (index == -1)
-				Debug.Log("Everybody died [*]");
+//			if(index >= 0)
+//				Debug.Log("Player" + index + " won!");
+//			else if (index == -1)
+//				Debug.Log("Everybody died [*]");
 			return index;
 		}
 		
