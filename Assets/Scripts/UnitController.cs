@@ -151,7 +151,7 @@ namespace Assets.Scripts
                 // player movement
                 Vector3 direction = new Vector3(Input.GetAxis("Horizontal" + owner), 0, Input.GetAxis("Vertical" + owner)).normalized;
 
-                //animator.SetFloat("Speed", direction.magnitude);
+                animator.SetFloat("Speed", direction.magnitude);
 
                 Vector3 movement = direction * speed * Time.deltaTime;
                 movement.y = body.velocity.y; // do not touch vertical movement, let gravity do its job
