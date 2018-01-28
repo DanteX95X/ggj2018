@@ -86,7 +86,8 @@ namespace Assets.Scripts
 				}
 			}
 
-			messageBox.Message = "" + unit.UnitName + " ciągnie druta w zaświatach.";
+			string[] messages = new string[] {"" + index + " ma przekichane.", "" + index + " baza wirusow została zaktualizowana"};
+			messageBox.Message = messages[Random.Range(0, messages.Length)];
 			Instantiate(tombstone, unit.transform.position, tombstone.transform.rotation);
 			Destroy(unit.gameObject);
 

@@ -67,7 +67,7 @@ namespace Assets.Scripts
 			//Time.timeScale = 0;
 			waypoints = GameObject.FindGameObjectsWithTag("Respawn");
 			introDone = false;
-			FindObjectOfType<MessageBox>().Message = "Get ready to sneeze!";
+			FindObjectOfType<MessageBox>().Message = "Przygotujcie kulfony!";
 		}
 
 		void Update()
@@ -99,7 +99,7 @@ namespace Assets.Scripts
 			if (status != -2 && !gameOver)
 			{
 				Debug.Log("GameOver");
-				FindObjectOfType<MessageBox>().Message = "You won! You sick bastard!";
+				FindObjectOfType<MessageBox>().Message = "" +  status + "Wygrałeś, chory po**e";
                 
                 audioSource.clip = gameOverMusic;
                 if (!audioSource.isPlaying)
@@ -222,7 +222,7 @@ namespace Assets.Scripts
 			    (Camera.main.transform.rotation.eulerAngles.y - waypoints[waypointIndex].transform.rotation.eulerAngles.y) < 1)
 			{
 				Debug.Log("done");
-				FindObjectOfType<MessageBox>().Message = "May the sickest win!";
+				FindObjectOfType<MessageBox>().Message = "Niech wygra najchorszy.";
 				introDone = true;
 				foreach (var player in players)
 				{
