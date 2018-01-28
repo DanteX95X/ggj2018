@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -36,6 +37,8 @@ namespace Assets.Scripts
 		private Animator animator;
         
         private PlayerRotation rotator;
+
+		private Game game;
 
         void Awake()
         {
@@ -91,13 +94,14 @@ namespace Assets.Scripts
 				isIll = true;
 
 			animator = GetComponent<Animator>();
+			game = FindObjectOfType<Game>();
 		}
 
         // FixedUpdate is at fixed intervals - used for physics
         void FixedUpdate()
         {
             // turn active unity controlled by knm
-            if (isActive)
+            if (isActive && !game.GameOver)
             {
                 if (owner == 0) // keyboard and mouse
                 {
@@ -108,19 +112,10 @@ namespace Assets.Scripts
         }
 
         void Update()
-		{
-
-            // debug
-            //if (Input.GetAxis("Horizontal" + 1 + "R") != 0)
-            //{
-            //    Debug.Log("Horizontal" + 1 + "R" + ": " + Input.GetAxis("Horizontal" + 1 + "R"));
-            //}
-            //if (Input.GetAxis("Vertical" + 1 + "R") != 0)
-            //{
-            //    Debug.Log("Vertical" + 1 + "R" + ": " + Input.GetAxis("Vertical" + 1 + "R"));
-            //}
-
-            
+        {
+	        if (game.GameOver)
+		        return;
+			
             if (isActive)
 			{
                 // aim and shoot
