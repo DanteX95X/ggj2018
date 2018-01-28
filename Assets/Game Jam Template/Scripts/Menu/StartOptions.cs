@@ -26,11 +26,14 @@ public class StartOptions : MonoBehaviour {
 	private ShowPanels showPanels;										//Reference to ShowPanels script on UI GameObject, to show and hide panels
     private CanvasGroup menuCanvasGroup;
 
+    public AudioSource audioSource;
 
     void Awake()
-	{
-		//Get a reference to ShowPanels attached to UI object
-		showPanels = GetComponent<ShowPanels> ();
+    {
+        audioSource = GetComponent<AudioSource>();
+
+        //Get a reference to ShowPanels attached to UI object
+        showPanels = GetComponent<ShowPanels> ();
 
 		//Get a reference to PlayMusic attached to UI object
 		playMusic = GetComponent<PlayMusic> ();
@@ -50,6 +53,8 @@ public class StartOptions : MonoBehaviour {
 		//{
 		//}
         playMusic.FadeDown(menuSettingsData.menuFadeTime);
+
+        audioSource.Play();
 
         //If changeScenes is true, start fading and change scenes halfway through animation when screen is blocked by FadeImage
         if (menuSettingsData.nextSceneIndex != 0) 
