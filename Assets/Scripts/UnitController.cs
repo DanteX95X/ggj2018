@@ -34,8 +34,16 @@ namespace Assets.Scripts
 		private bool isIll;
 
 		private Animator animator;
+        
+        private PlayerRotation rotator;
 
-		public bool IsIll
+        void Awake()
+        {
+            // Set up references.
+            rotator = GetComponent<PlayerRotation>();
+        }
+
+        public bool IsIll
 		{
 			get { return isIll; }
 			set { isIll = value; }
@@ -85,7 +93,21 @@ namespace Assets.Scripts
 			animator = GetComponent<Animator>();
 		}
 
-		void Update()
+        // FixedUpdate is at fixed intervals - used for physics
+        void FixedUpdate()
+        {
+            // turn active unity controlled by knm
+            if (isActive)
+            {
+                if (owner == 0) // keyboard and mouse
+                {
+                    //turn
+                    rotator.Turning();
+                }
+            }
+        }
+
+        void Update()
 		{
 
             // debug
@@ -109,9 +131,10 @@ namespace Assets.Scripts
 
                     Vector3 lookingDirection;
 
-                    if (owner == 0)
+                    if (owner == 0) // keyboard and mouse
                     {
-                        lookingDirection = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane)) - transform.position;
+                        lookingDirection = transform.forward;
+
                     }
                     else //(owner == 1, 2, 3)
                     {

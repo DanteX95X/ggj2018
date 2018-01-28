@@ -175,6 +175,7 @@ GameObject:
   - component: {fileID: 54499135598414930}
   - component: {fileID: 136264618060187738}
   - component: {fileID: 114742684407220982}
+  - component: {fileID: 114009654111741906}
   m_Layer: 0
   m_Name: UnitMesh
   m_TagString: Untagged
@@ -916,6 +917,17 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4278190335
+--- !u!114 &114009654111741906
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1300592352940924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13a05799768c31a4c80d11e304e53fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114742684407220982
 MonoBehaviour:
   m_ObjectHideFlags: 1
