@@ -106,7 +106,7 @@ namespace Assets.Scripts
         void FixedUpdate()
         {
             // turn active unity controlled by knm
-	        if (isActive && (!game.GameOver || isReady))
+	        if (isActive && (!game.GameOver && isReady))
             {
                 if (owner == 0) // keyboard and mouse
                 {

@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 250
-  maxScaleFraction: 10
+  maxScaleFraction: 5
   growthTime: 10
 --- !u!135 &135297929572752916
 SphereCollider:
